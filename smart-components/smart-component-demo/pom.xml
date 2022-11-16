@@ -16,4 +16,10 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.chenyangshu</groupId>
+            <artifactId>smart-component-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>
