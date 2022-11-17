@@ -1,4 +1,4 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.processor;
 
 import com.smartgeek.component.flow.annotation.processor.Processor;
 import com.smartgeek.component.flow.exception.FlowErrorCode;
@@ -32,7 +32,7 @@ public class NodeProcessorHub {
     public void init() {
         String[] processorBeanNames = this.applicationContext.getBeanNamesForAnnotation(Processor.class);
         for (String processorBeanName : processorBeanNames) {
-            Work nodeProcessor = this.getProcessorByBeanName(processorBeanName);
+            NodeProcessor nodeProcessor = this.getProcessorByBeanName(processorBeanName);
             ProcessorExecutor processorExecutor = ProcessorParser.parseProcessor(nodeProcessor);
             if (this.processorExecutorMap.containsKey(processorExecutor.getProcessorName())) {
                 throw new FlowException(FlowErrorCode.NODE_PROCESSOR_DUPLICATE_NAME.getErrCode(), "存在重名的处理器：" + processorExecutor.getProcessorName());
@@ -48,10 +48,10 @@ public class NodeProcessorHub {
      * @param beanName bean名字
      * @return {@link Work}
      */
-    protected Work getProcessorByBeanName(String beanName) {
+    protected NodeProcessor getProcessorByBeanName(String beanName) {
         Object processor = this.applicationContext.getBean(beanName);
         this.checkNodeProcessor(processor);
-        return (Work) processor;
+        return (NodeProcessor) processor;
     }
 
 

@@ -1,7 +1,7 @@
 package com.smartgeek.component.flow.workflow.sequential;
 
 import com.smartgeek.component.flow.work.Work;
-import com.smartgeek.component.flow.work.WorkContext;
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.workflow.AbstractWorkFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

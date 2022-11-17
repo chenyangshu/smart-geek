@@ -1,12 +1,13 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.workflow.rule;
 
 import cn.hutool.core.util.StrUtil;
 import com.smartgeek.component.flow.annotation.flow.Flow;
 import com.smartgeek.component.flow.annotation.node.EndNode;
 import com.smartgeek.component.flow.annotation.node.Node;
 import com.smartgeek.component.flow.annotation.node.StartNode;
+import com.smartgeek.component.flow.engine.WorkContext;
+import com.smartgeek.component.flow.processor.*;
 import com.smartgeek.component.flow.transaction.WorkFlowTxsHolder;
-import com.smartgeek.component.flow.work.WorkContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
@@ -22,11 +23,11 @@ import java.lang.reflect.Modifier;
  * @date 2022/9/21 13:15
  * @description:
  */
-public class FlowParser {
+public class RuleFlowParser {
 
-    private static final Logger logger = LoggerFactory.getLogger(FlowParser.class);
+    private static final Logger logger = LoggerFactory.getLogger(RuleFlowParser.class);
 
-    public FlowParser() {
+    public RuleFlowParser() {
     }
 
 
@@ -36,9 +37,9 @@ public class FlowParser {
      * @param flow             流
      * @param nodeProcessorHub 节点处理中心
      * @param flowTxsHolder    流tx持有人
-     * @return {@link FlowExecutor}
+     * @return {@link RuleFlowExecutor}
      */
-    public static FlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub, WorkFlowTxsHolder flowTxsHolder) {
+    public static RuleFlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub, WorkFlowTxsHolder flowTxsHolder) {
         Class<?> flowClass = AopUtils.getTargetClass(flow);
         logger.debug("解析流程：{}", ClassUtils.getQualifiedName(flowClass));
         Flow flowAnnotation = (Flow) flowClass.getAnnotation(Flow.class);
@@ -48,9 +49,9 @@ public class FlowParser {
         }
 
 
-        FlowExecutor flowExecutor = new FlowExecutor(flowName, flowAnnotation.enableFlowTx(), flow);
+        RuleFlowExecutor ruleFlowExecutor = new RuleFlowExecutor(flowName, flowAnnotation.enableFlowTx(), flow);
         if (flowAnnotation.enableFlowTx()) {
-            flowExecutor.setFlowTxExecutor(flowTxsHolder.getRequiredFlowTxExecutor(flowName));
+            ruleFlowExecutor.setFlowTxExecutor(flowTxsHolder.getRequiredFlowTxExecutor(flowName));
         }
 
 
@@ -59,19 +60,19 @@ public class FlowParser {
 
             if (nodeAnnotation != null) {
                 NodeExecutor nodeExecutor = parseNode(nodeAnnotation, method, nodeProcessorHub);
-                flowExecutor.addNode(nodeExecutor);
+                ruleFlowExecutor.addNode(nodeExecutor);
                 if (method.isAnnotationPresent(StartNode.class)) {
-                    flowExecutor.setStartNode(nodeExecutor.getNodeName());
+                    ruleFlowExecutor.setStartNode(nodeExecutor.getNodeName());
                 }
 
                 if (method.isAnnotationPresent(EndNode.class)) {
-                    flowExecutor.addEndNode(nodeExecutor.getNodeName());
+                    ruleFlowExecutor.addEndNode(nodeExecutor.getNodeName());
                 }
             }
         }
 
-        flowExecutor.validate();
-        return flowExecutor;
+        ruleFlowExecutor.validate();
+        return ruleFlowExecutor;
 
     }
 

@@ -1,6 +1,7 @@
 package com.smartgeek.component.flow.workflow.parallel;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.work.*;
 import com.smartgeek.component.flow.transaction.FlowTxExecutor;
 import com.smartgeek.component.flow.transaction.WorkFlowTxsHolder;

@@ -1,9 +1,9 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.workflow.rule;
 
 import com.smartgeek.component.flow.exception.FlowExecutionException;
+import com.smartgeek.component.flow.processor.NodeExecutor;
 import com.smartgeek.component.flow.transaction.FlowTxExecutor;
-import com.smartgeek.component.flow.work.WorkContext;
-import com.smartgeek.component.flow.workflow.AbstractWorkFlow;
+import com.smartgeek.component.flow.engine.WorkContext;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,31 +22,24 @@ import java.util.stream.Collectors;
  * @date 2022/9/21 13:14
  * @description:
  */
-public class FlowExecutor extends AbstractWorkFlow {
+public class RuleFlowExecutor {
 
-    private static final Logger log = LoggerFactory.getLogger(FlowExecutor.class);
-//    private String flowName;
-    private boolean enableFlowTx;
+    private static final Logger log = LoggerFactory.getLogger(RuleFlowExecutor.class);
     private Object flow;
     private String startNode;
     private Set<String> endNodes = new HashSet();
     private Map<String, NodeExecutor> nodeExecutorMap = new ConcurrentHashMap();
     private FlowTxExecutor flowTxExecutor;
     private Class classOfTarget;
+    private Boolean enableFlowTx;
+    private String name;
 
-
-//    public FlowExecutor(String flowName, boolean enableFlowTx, Object flow) {
-//        this.name = flowName;
-//        this.enableFlowTx = enableFlowTx;
-//        this.flow = flow;
-//    }
-
-    public FlowExecutor(String name, boolean enableFlowTx, Object flow) {
-        super(name);
+    public RuleFlowExecutor(String name, boolean enableFlowTx, Object flow) {
+        this.name=name;
         this.enableFlowTx = enableFlowTx;
         this.flow = flow;
     }
-    @Override
+
     public void execute(WorkContext flowHandleContext)  {
         this.execute(flowHandleContext, this.startNode);
     }
@@ -139,18 +132,7 @@ public class FlowExecutor extends AbstractWorkFlow {
 
 
     private void recordFailedFlowNode(String currNode, NodeExecutor currNodeExecutor, WorkContext flowHandleContext) {
-//        if (this.enableFlowTx && currNode != null && currNodeExecutor != null) {
-//            if (FlowCommonResourceHolder.isFlowRepositoryEnabled() && currNodeExecutor.isEnableNodeTx()) {
-//                FlowExeRecord record = new FlowExeRecord();
-//                record.setFlowId(this.flow.getClass().getName());
-//                record.setFlowName(this.name);
-//                record.setNodeName(currNode);
-//                record.setAppId(SpringUtil.getApplicationContext().getEnvironment().getProperty("spring.application.name", ""));
-//                record.setContext(flowHandleContext);
-//                FlowCommonResourceHolder.getFlowRepository().asynAddFailedRecord(record);
-//            }
-//
-//        }
+
     }
 
 
@@ -201,7 +183,9 @@ public class FlowExecutor extends AbstractWorkFlow {
         }
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     public Object getFlow() {
         return this.flow;

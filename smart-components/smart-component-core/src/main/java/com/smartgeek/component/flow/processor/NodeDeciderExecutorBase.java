@@ -1,6 +1,6 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.processor;
 
-import com.smartgeek.component.flow.work.WorkContext;
+import com.smartgeek.component.flow.engine.WorkContext;
 
 import java.lang.reflect.Method;
 

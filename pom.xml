@@ -10,6 +10,7 @@
     <modules>
         <module>smart-components</module>
         <module>smart-bom</module>
+        <module>smart-business</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,6 +1,6 @@
 package com.smartgeek.component.flow.workflow;
 
-import com.smartgeek.component.flow.work.WorkContext;
+import com.smartgeek.component.flow.engine.WorkContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

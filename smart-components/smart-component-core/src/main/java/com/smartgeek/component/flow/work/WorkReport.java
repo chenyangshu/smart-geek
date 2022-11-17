@@ -23,6 +23,8 @@
  */
 package com.smartgeek.component.flow.work;
 
+import com.smartgeek.component.flow.engine.WorkContext;
+
 /**
  * Execution report of a unit of work.
  *

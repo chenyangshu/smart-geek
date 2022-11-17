@@ -2,8 +2,8 @@ package com.smartgeek.component.flow.transaction;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
+import com.smartgeek.component.flow.workflow.WorkFlowHub;
 import com.smartgeek.component.flow.workflow.AbstractWorkFlow;
-import com.smartgeek.component.flow.registrar.FlowRegistrar;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,20 +32,20 @@ public class WorkFlowTxsHolder {
     private final PlatformTransactionManager transactionManager;
 
     // 流程注册器
-    private final FlowRegistrar flowRegistrar;
+//    private final WorkFlowRegistrar workFlowRegistrar;
 
     private Map<String, FlowTxExecutor> flowTxExecutorMap = new ConcurrentHashMap<>();
 
 
     @PostConstruct
     public void init() {
-        Set<String> flowNames = flowRegistrar.getNames();
+        Set<String> flowNames = WorkFlowHub.getNames();
         if (CollectionUtil.isEmpty(flowNames)) {
             return;
         }
 
         for (String flowName : flowNames) {
-            AbstractWorkFlow workFlow = flowRegistrar.get(flowName);
+            AbstractWorkFlow workFlow = WorkFlowHub.get(flowName);
             if (workFlow.getEnableFlowTx()) {
                 FlowTxExecutor flowTxExecutor = WorkFlowTxParser.parseFlowTx(flowName, this.getTxManager(flowName, workFlow.getTxManager()));
                 this.flowTxExecutorMap.put(flowName, flowTxExecutor);

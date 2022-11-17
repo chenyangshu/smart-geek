@@ -1,7 +1,8 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.workflow.rule;
 
 import com.smartgeek.component.flow.annotation.flow.Flow;
-import com.smartgeek.component.flow.registrar.FlowRegistrar;
+import com.smartgeek.component.flow.processor.NodeProcessorHub;
+import com.smartgeek.component.flow.workflow.WorkFlowHub;
 import com.smartgeek.component.flow.transaction.WorkFlowTxsHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +17,7 @@ import javax.annotation.PostConstruct;
  */
 
 @Component
-public class FlowsHub {
+public class RuleFlowsHub {
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -26,23 +27,19 @@ public class FlowsHub {
     @Autowired
     private WorkFlowTxsHolder flowTxsHolder;
 
-
-    @Autowired
-    private FlowRegistrar flowRegistrar;
-
-
-    public FlowsHub() {
+    public RuleFlowsHub() {
     }
 
     @PostConstruct
     public void init() {
         String[] flowBeanNames = this.applicationContext.getBeanNamesForAnnotation(Flow.class);
         for (String flowBeanName : flowBeanNames) {
-            FlowExecutor flowExecutor = FlowParser.parseFlow(this.applicationContext.getBean(flowBeanName), this.nodeProcessorHub, this.flowTxsHolder);
-            if (this.flowRegistrar.containsKey(flowExecutor.getName())) {
-                throw new RuntimeException("存在重名的流程" + flowExecutor.getName());
-            }
-            this.flowRegistrar.register(flowExecutor);
+            RuleFlowExecutor ruleFlowExecutor = RuleFlowParser.parseFlow(this.applicationContext.getBean(flowBeanName), this.nodeProcessorHub, this.flowTxsHolder);
+            RuleFlow ruleFlow = new RuleFlow(ruleFlowExecutor);
+//            if (WorkFlowHub.containsKey(ruleFlowExecutor.getName())) {
+//                throw new RuntimeException("存在重名的流程" + ruleFlowExecutor.getName());
+//            }
+            WorkFlowHub.register(ruleFlow);
         }
 
     }

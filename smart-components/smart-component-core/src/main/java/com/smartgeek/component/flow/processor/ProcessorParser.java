@@ -1,8 +1,8 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.processor;
 
 import com.smartgeek.component.flow.annotation.processor.Processor;
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.work.Work;
-import com.smartgeek.component.flow.work.WorkContext;
 import io.vavr.control.Try;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class ProcessorParser {
      * @param processor 处理器
      * @return {@link ProcessorExecutor}
      */
-    public static ProcessorExecutor parseProcessor(Work processor) {
+    public static ProcessorExecutor parseProcessor(NodeProcessor processor) {
         Class<?> processorClass = AopUtils.getTargetClass(processor);
         log.debug("解析处理器：{}", ClassUtils.getQualifiedName(processorClass));
         //通过注解获取处理器名

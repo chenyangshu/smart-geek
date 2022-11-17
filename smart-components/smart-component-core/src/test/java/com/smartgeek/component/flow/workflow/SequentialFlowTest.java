@@ -1,8 +1,7 @@
 package com.smartgeek.component.flow.workflow;
 
-import com.smartgeek.component.flow.registrar.FlowRegistrar;
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.work.Work;
-import com.smartgeek.component.flow.work.WorkContext;
 import com.smartgeek.component.flow.workflow.parallel.ParallelFlow;
 import com.smartgeek.component.flow.workflow.sequential.SequentialFlow;
 import org.junit.Test;
@@ -45,11 +44,14 @@ public class SequentialFlowTest {
                 .with(executorService)
                 .build();
 
-        FlowRegistrar flowRegistrar = new FlowRegistrar();
-        flowRegistrar.register(testParallelFlow);
+        WorkFlowHub.register(testParallelFlow);
 
-        AbstractWorkFlow workFlow = flowRegistrar.get("testConditionalFlow");
-        workFlow.execute(workContext);
+        WorkFlowHub.get("testParallelFlow").execute(workContext);
+//        WorkFlowRegistrar workFlowRegistrar = new WorkFlowRegistrar();
+//        workFlowRegistrar.register(testParallelFlow);
+
+//        AbstractWorkFlow workFlow = workFlowRegistrar.get("testConditionalFlow");
+//        testParallelFlow.execute(workContext);
 
 
     }

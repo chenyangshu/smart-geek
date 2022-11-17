@@ -1,9 +1,8 @@
 package com.smartgeek.component.flow.engine;
 
-import com.smartgeek.component.flow.work.WorkContext;
 import com.smartgeek.component.flow.exception.ExceptionUtil;
+import com.smartgeek.component.flow.workflow.WorkFlowHub;
 import com.smartgeek.component.flow.workflow.AbstractWorkFlow;
-import com.smartgeek.component.flow.registrar.FlowRegistrar;
 import lombok.AllArgsConstructor;
 
 /**
@@ -14,8 +13,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DefaultWorkFlowEngine implements WorkFlowEngine {
 
-    // 流程注册器
-    private final FlowRegistrar flowRegistrar;
+//    // 流程注册器
+//    private final WorkFlowRegistrar workFlowRegistrar;
 
 
     @Override
@@ -40,7 +39,7 @@ public class DefaultWorkFlowEngine implements WorkFlowEngine {
 
     private void executeFlow(String flowName, WorkContext context) {
         try {
-            AbstractWorkFlow abstractWorkFlow = this.flowRegistrar.get(flowName);
+            AbstractWorkFlow abstractWorkFlow = WorkFlowHub.get(flowName);
             abstractWorkFlow.execute(context);
         } catch (Throwable e) {
             ExceptionUtil.rethrow(e);

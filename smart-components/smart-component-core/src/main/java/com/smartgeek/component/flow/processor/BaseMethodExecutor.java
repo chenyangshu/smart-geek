@@ -1,4 +1,4 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.processor;
 
 import com.smartgeek.component.flow.annotation.node.NextNodeRoute;
 import com.smartgeek.component.flow.annotation.node.ProcessNode;

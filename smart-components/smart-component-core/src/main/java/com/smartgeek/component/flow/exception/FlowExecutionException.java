@@ -1,6 +1,6 @@
 package com.smartgeek.component.flow.exception;
 
-import com.smartgeek.component.flow.work.WorkContext;
+import com.smartgeek.component.flow.engine.WorkContext;
 import lombok.Data;
 
 /**

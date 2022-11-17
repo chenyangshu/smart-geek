@@ -1,5 +1,7 @@
 package com.smartgeek.component.flow.work;
 
+import com.smartgeek.component.flow.engine.WorkContext;
+
 /**
  * @author cys
  * @date 2022/11/15 10:20
@@ -12,6 +14,5 @@ public interface Work<T> {
     }
 
     void execute(WorkContext<T> workContext);
-
 
 }

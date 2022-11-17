@@ -2,7 +2,7 @@ package com.smartgeek.component.flow.workflow.sequential;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.smartgeek.component.flow.work.Work;
-import com.smartgeek.component.flow.work.WorkContext;
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.exception.FlowExecutionException;
 import com.smartgeek.component.flow.transaction.FlowTxExecutor;
 import com.smartgeek.component.flow.transaction.WorkFlowTxsHolder;

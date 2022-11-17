@@ -1,8 +1,8 @@
-package com.smartgeek.component.flow.workflow.conditional;
+package com.smartgeek.component.flow.processor;
 
 
+import com.smartgeek.component.flow.engine.WorkContext;
 import com.smartgeek.component.flow.work.Work;
-import com.smartgeek.component.flow.work.WorkContext;
 
 import java.lang.reflect.Method;
 
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @author treeyschen
  * @date 2022/09/21
  */
-public class ProcessorExecutor {
+public class ProcessorExecutor implements Work{
 
     /**
      * 处理器名字
@@ -21,7 +21,7 @@ public class ProcessorExecutor {
     /**
      * 处理器
      */
-    private Work processor;
+    private NodeProcessor processor;
 
 
     /**
@@ -35,7 +35,7 @@ public class ProcessorExecutor {
      * @param processorName 处理器名字
      * @param processor     处理器
      */
-    public ProcessorExecutor(String processorName, Work processor) {
+    public ProcessorExecutor(String processorName, NodeProcessor processor) {
         this.processorName = processorName;
         this.processor = processor;
     }
@@ -48,7 +48,7 @@ public class ProcessorExecutor {
      * @return {@link Object}
      * @throws Throwable throwable
      */
-    public void execute(WorkContext flowHandleContext) throws Throwable {
+    public void execute(WorkContext flowHandleContext)  {
         this.processor.execute(flowHandleContext);
     }
 

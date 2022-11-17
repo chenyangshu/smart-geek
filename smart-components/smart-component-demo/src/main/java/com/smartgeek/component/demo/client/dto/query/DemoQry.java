@@ -1,4 +1,4 @@
-package com.smartgeek.component.demo.client.dto;
+package com.smartgeek.component.demo.client.dto.query;
 
 /**
  * @author cys
