@@ -1,4 +1,4 @@
-package com.smartgeek.component.demo.app.command.user;
+package com.smartgeek.component.demo.app.handler.query;
 
 /**
  * @author cys
