@@ -1,4 +1,4 @@
-package com.smartgeek.component.demo.app.service.step;
+package com.smartgeek.component.demo.app.flow.step;
 
 import com.smartgeek.component.flow.annotation.processor.Processor;
 import com.smartgeek.component.flow.work.Work;

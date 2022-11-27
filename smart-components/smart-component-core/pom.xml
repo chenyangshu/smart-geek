@@ -54,5 +54,17 @@
         </dependency>
         <!-- MapStruct end -->
 
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 </project>
