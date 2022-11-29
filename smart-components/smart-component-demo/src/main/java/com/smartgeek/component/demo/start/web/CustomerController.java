@@ -8,9 +8,11 @@ import com.smartgeek.component.demo.app.command.query.CustomerListByNameQryExe;
 import com.smartgeek.component.demo.client.dto.CustomerAddCmd;
 import com.smartgeek.component.demo.client.dto.CustomerCO;
 import com.smartgeek.component.demo.client.dto.query.CustomerListByNameQry;
+import com.smartgeek.component.searcher.BeanSearchEngine;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author cys
@@ -24,6 +26,8 @@ public class CustomerController implements CustomerClient {
     private CustomerAddCmdExe customerAddCmdExe;
     @Resource
     private CustomerListByNameQryExe customerListByNameQryExe;
+    @Resource
+    private BeanSearchEngine beanSearchEngine;
 
     public SingleResponse<String> addCustomer(CustomerAddCmd customerAddCmd) {
         return customerAddCmdExe.execute(customerAddCmd);
@@ -32,7 +36,9 @@ public class CustomerController implements CustomerClient {
     public MultiResponse<CustomerCO> listCustomerByName(String name) {
         CustomerListByNameQry customerListByNameQry = new CustomerListByNameQry();
         customerListByNameQry.setCustomerName(name);
-        return customerListByNameQryExe.execute(customerListByNameQry);
+        List<CustomerCO> customerCOS = beanSearchEngine.searchList(CustomerCO.class, customerListByNameQry);
+        return MultiResponse.of(customerCOS);
+//        return customerListByNameQryExe.execute(customerListByNameQry);
     }
 
 }
