@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubTreeEntity;
-import com.smartgeek.component.web.repository.ISubTreeRepository;
+import com.smartgeek.component.web.repository.ISubTreeRepositoryPort;
 import com.smartgeek.component.web.domainservice.IBaseDomainService;
 import com.smartgeek.component.web.domainservice.ISubTreeDomainService;
 import com.smartgeek.component.web.domainservice.impl.handle.SubTreeHandleDomainServiceImpl;
@@ -25,7 +25,7 @@ import java.util.List;
  * @param <ISS> SubIService
  * @author xueyi
  */
-public abstract class SubTreeDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepository<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubTreeHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubTreeDomainService<Q, D, SQ, SD> {
+public abstract class SubTreeDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubTreeHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubTreeDomainService<Q, D, SQ, SD> {
 
     /**
      * 根据外键查询子数据对象集合 | 子数据

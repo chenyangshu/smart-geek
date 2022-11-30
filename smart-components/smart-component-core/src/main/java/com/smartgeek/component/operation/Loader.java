@@ -10,9 +10,9 @@ import java.util.function.Supplier;
  * @author chenyangshu
  * @date 2022/09/04
  */
-public interface Loader<T, ID> {
+public interface Loader<T> {
 
-    UpdateHandler<T> loadById(ID id);
+    UpdateHandler<T> loadById(Serializable id);
 
     UpdateHandler<T> load(Supplier<T> t);
 

@@ -66,6 +66,11 @@
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.chenyangshu</groupId>
+            <artifactId>smart-component-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -1,5 +1,6 @@
 package com.smartgeek.component.demo.infrastructure.tunnel.db.po;
 
+import com.smartgeek.component.web.model.base.BaseEntity;
 import lombok.Data;
 
 /**
@@ -8,7 +9,7 @@ import lombok.Data;
  * @description:
  */
 @Data
-public class CustomerPO {
+public class CustomerPO extends BaseEntity {
     private String customerId;
     private String memberId;
     private String globalId;

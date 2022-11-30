@@ -3,7 +3,7 @@ package com.smartgeek.component.demo.domain.customer.service.impl;
 import com.smartgeek.component.demo.domain.customer.Customer;
 import com.smartgeek.component.demo.domain.customer.event.CustomerCreateEvent;
 import com.smartgeek.component.demo.domain.customer.event.CustomerUpdateEvent;
-import com.smartgeek.component.demo.domain.customer.ports.CustomerPort;
+import com.smartgeek.component.demo.domain.customer.ports.ICustomerRepositoryPort;
 import com.smartgeek.component.demo.domain.customer.service.CustomerDomainService;
 import com.smartgeek.component.annotation.domain.DomainService;
 import com.smartgeek.component.operation.EntityOperations;
@@ -20,12 +20,12 @@ import org.springframework.context.ApplicationEventPublisher;
 @DomainService
 @RequiredArgsConstructor
 public class CustomerDomainServiceImpl implements CustomerDomainService {
-    private final CustomerPort customerPort;
+    private final ICustomerRepositoryPort customerRepositoryPort;
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public void create(Customer customer) {
-        EntityOperations.doCreate(customerPort)
+        EntityOperations.doCreate(customerRepositoryPort)
                 .create(() -> customer)
                 .update(entity -> entity.init())
                 .successHook(entity -> eventPublisher.publishEvent(new CustomerCreateEvent(entity)))
@@ -34,7 +34,7 @@ public class CustomerDomainServiceImpl implements CustomerDomainService {
 
     @Override
     public void valid(Customer customer) {
-        EntityOperations.doUpdate(customerPort)
+        EntityOperations.doUpdate(customerRepositoryPort)
                 .loadById(customer.getCustomerId())
                 .update(entity->entity.valid())
                 .successHook(entity -> eventPublisher.publishEvent(new CustomerUpdateEvent(entity)))

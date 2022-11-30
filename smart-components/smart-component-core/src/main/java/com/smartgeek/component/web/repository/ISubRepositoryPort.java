@@ -14,7 +14,7 @@ import java.util.List;
  * @param <SD> SubEntity
  * @author xueyi
  */
-public interface ISubManager<Q extends BaseEntity, D extends BaseEntity, SQ extends BaseEntity, SD extends BaseEntity> {
+public interface ISubRepositoryPort<Q extends BaseEntity, D extends BaseEntity, SQ extends BaseEntity, SD extends BaseEntity> {
 
     /**
      * 根据Id查询单条数据对象 | 包含子数据

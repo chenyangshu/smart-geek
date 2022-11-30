@@ -6,7 +6,7 @@ import com.smartgeek.component.constants.BaseConstants;
 import com.smartgeek.component.utils.TreeUtils;
 import com.smartgeek.component.web.model.TreeSelect;
 import com.smartgeek.component.web.model.base.TreeEntity;
-import com.smartgeek.component.web.repository.ITreeRepository;
+import com.smartgeek.component.web.repository.ITreeRepositoryPort;
 import com.smartgeek.component.web.domainservice.ITreeDomainService;
 import com.smartgeek.component.web.domainservice.impl.handle.TreeHandleDomainServiceImpl;
 
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @param <IDG> EntityIManager
  * @author xueyi
  */
-public class TreeDomainServiceImpl<Q extends TreeEntity<D>, D extends TreeEntity<D>, IDG extends ITreeRepository<Q, D>> extends TreeHandleDomainServiceImpl<Q, D, IDG> implements ITreeDomainService<Q, D> {
+public class TreeDomainServiceImpl<Q extends TreeEntity<D>, D extends TreeEntity<D>, IDG extends ITreeRepositoryPort<Q, D>> extends TreeHandleDomainServiceImpl<Q, D, IDG> implements ITreeDomainService<Q, D> {
 
     /**
      * 根据Id查询本节点及其所有祖籍节点

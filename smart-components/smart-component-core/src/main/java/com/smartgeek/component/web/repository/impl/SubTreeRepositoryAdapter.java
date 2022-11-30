@@ -9,7 +9,7 @@ import com.smartgeek.component.web.mapper.BaseMapper;
 import com.smartgeek.component.web.mapper.SubTreeMapper;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubTreeEntity;
-import com.smartgeek.component.web.repository.ISubTreeRepository;
+import com.smartgeek.component.web.repository.ISubTreeRepositoryPort;
 import com.smartgeek.component.web.repository.impl.handle.SubTreeHandleRepositoryAdapter;
 
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @param <SPM> SubPoMapper
  * @author xueyi
  */
-public abstract class SubTreeRepositoryAdapter<Q extends P, D extends P, P extends SubTreeEntity<D, SD>, PM extends SubTreeMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubTreeHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubTreeRepository<Q, D, SQ, SD> {
+public abstract class SubTreeRepositoryAdapter<Q extends P, D extends P, P extends SubTreeEntity<D, SD>, PM extends SubTreeMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubTreeHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubTreeRepositoryPort<Q, D, SQ, SD> {
 
     /**
      * 根据Id查询单条数据对象 | 包含子数据

@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.smartgeek.component.constants.BaseConstants;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubBaseEntity;
-import com.smartgeek.component.web.repository.ISubBaseRepository;
+import com.smartgeek.component.web.repository.ISubBaseRepositoryPort;
 import com.smartgeek.component.web.domainservice.IBaseDomainService;
 import com.smartgeek.component.web.domainservice.impl.BaseDomainServiceImpl;
 import com.smartgeek.component.web.domainservice.impl.SubBaseDomainServiceImpl;
@@ -24,7 +24,7 @@ import java.util.Collection;
  * @param <ISS> SubIService
  * @author xueyi
  */
-public abstract class SubBaseHandleDomainServiceImpl<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, IDG extends ISubBaseRepository<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends BaseDomainServiceImpl<Q, D, IDG> {
+public abstract class SubBaseHandleDomainServiceImpl<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, IDG extends ISubBaseRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends BaseDomainServiceImpl<Q, D, IDG> {
 
     @Autowired
     protected ISS subService;

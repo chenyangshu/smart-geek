@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.smartgeek.component.constants.BaseConstants;
 import com.smartgeek.component.web.model.base.TreeEntity;
-import com.smartgeek.component.web.repository.ITreeRepository;
+import com.smartgeek.component.web.repository.ITreeRepositoryPort;
 import com.smartgeek.component.web.domainservice.impl.BaseDomainServiceImpl;
 import com.smartgeek.component.web.domainservice.impl.TreeDomainServiceImpl;
 
@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @param <IDG> EntityIManager
  * @author xueyi
  */
-public class TreeHandleDomainServiceImpl<Q extends TreeEntity<D>, D extends TreeEntity<D>, IDG extends ITreeRepository<Q, D>> extends BaseDomainServiceImpl<Q, D, IDG> {
+public class TreeHandleDomainServiceImpl<Q extends TreeEntity<D>, D extends TreeEntity<D>, IDG extends ITreeRepositoryPort<Q, D>> extends BaseDomainServiceImpl<Q, D, IDG> {
 
     /**
      * 新增/修改 树型 检查父级状态

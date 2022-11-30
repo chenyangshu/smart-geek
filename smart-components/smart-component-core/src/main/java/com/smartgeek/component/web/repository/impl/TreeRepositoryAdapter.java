@@ -9,7 +9,7 @@ import com.smartgeek.component.web.annotation.TenantIgnore;
 import com.smartgeek.component.web.converter.BaseConverter;
 import com.smartgeek.component.web.mapper.TreeMapper;
 import com.smartgeek.component.web.model.base.TreeEntity;
-import com.smartgeek.component.web.repository.ITreeRepository;
+import com.smartgeek.component.web.repository.ITreeRepositoryPort;
 import com.smartgeek.component.web.repository.impl.handle.TreeHandleRepositoryAdapter;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ import java.util.List;
  * @param <PM> PoMapper
  * @author xueyi
  */
-public class TreeRepositoryAdapter<Q extends P, D extends P, P extends TreeEntity<D>, PM extends TreeMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends TreeHandleRepositoryAdapter<Q, D, P, PM, CT> implements ITreeRepository<Q, D> {
+public class TreeRepositoryAdapter<Q extends P, D extends P, P extends TreeEntity<D>, PM extends TreeMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends TreeHandleRepositoryAdapter<Q, D, P, PM, CT> implements ITreeRepositoryPort<Q, D> {
 
     /**
      * 根据Id查询本节点及其所有祖籍节点

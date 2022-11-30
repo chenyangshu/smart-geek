@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubBaseEntity;
-import com.smartgeek.component.web.repository.ISubBaseRepository;
+import com.smartgeek.component.web.repository.ISubBaseRepositoryPort;
 import com.smartgeek.component.web.domainservice.IBaseDomainService;
 import com.smartgeek.component.web.domainservice.ISubBaseDomainService;
 import com.smartgeek.component.web.domainservice.impl.handle.SubBaseHandleDomainServiceImpl;
@@ -25,7 +25,7 @@ import java.util.List;
  * @param <ISS> SubIService
  * @author xueyi
  */
-public abstract class SubBaseDomainServiceImpl<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, IDG extends ISubBaseRepository<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubBaseHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubBaseDomainService<Q, D, SQ, SD> {
+public abstract class SubBaseDomainServiceImpl<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, IDG extends ISubBaseRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubBaseHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubBaseDomainService<Q, D, SQ, SD> {
 
     /**
      * 根据外键查询子数据对象集合 | 子数据

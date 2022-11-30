@@ -8,7 +8,7 @@ import com.smartgeek.component.constants.SqlConstants;
 import com.smartgeek.component.web.converter.BaseConverter;
 import com.smartgeek.component.web.mapper.BaseMapper;
 import com.smartgeek.component.web.model.base.BaseEntity;
-import com.smartgeek.component.web.repository.IBaseRepository;
+import com.smartgeek.component.web.repository.IBaseRepositoryPort;
 import com.smartgeek.component.web.repository.impl.handle.BaseHandleRepositoryAdapter;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ import java.util.List;
  * @param <PM> PoMapper
  * @author xueyi
  */
-public class BaseRepositoryAdapter<Q extends P, D extends P, P extends BaseEntity, PM extends BaseMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends BaseHandleRepositoryAdapter<Q, D, P, PM, CT> implements IBaseRepository<Q, D> {
+public class BaseRepositoryAdapter<Q extends P, D extends P, P extends BaseEntity, PM extends BaseMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends BaseHandleRepositoryAdapter<Q, D, P, PM, CT> implements IBaseRepositoryPort<Q, D> {
 
     /**
      * 查询数据对象列表

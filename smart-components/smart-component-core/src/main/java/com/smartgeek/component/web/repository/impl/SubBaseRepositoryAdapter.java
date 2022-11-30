@@ -9,7 +9,7 @@ import com.smartgeek.component.web.mapper.BaseMapper;
 import com.smartgeek.component.web.mapper.SubBaseMapper;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubBaseEntity;
-import com.smartgeek.component.web.repository.ISubBaseRepository;
+import com.smartgeek.component.web.repository.ISubBaseRepositoryPort;
 import com.smartgeek.component.web.repository.impl.handle.SubBaseHandleRepositoryAdapter;
 
 import java.io.Serializable;
@@ -28,7 +28,7 @@ import java.util.List;
  * @param <SPM> SubPoMapper
  * @author xueyi
  */
-public abstract class SubBaseRepositoryAdapter<Q extends P, D extends P, P extends SubBaseEntity<SD>, PM extends SubBaseMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubBaseHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubBaseRepository<Q, D, SQ, SD> {
+public abstract class SubBaseRepositoryAdapter<Q extends P, D extends P, P extends SubBaseEntity<SD>, PM extends SubBaseMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubBaseHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubBaseRepositoryPort<Q, D, SQ, SD> {
 
     /**
      * 根据Id查询单条数据对象 | 包含子数据

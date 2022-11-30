@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.smartgeek.component.constants.BaseConstants;
 import com.smartgeek.component.web.model.base.BaseEntity;
-import com.smartgeek.component.web.repository.IBaseRepository;
+import com.smartgeek.component.web.repository.IBaseRepositoryPort;
 import com.smartgeek.component.web.domainservice.IBaseDomainService;
 import com.smartgeek.component.web.domainservice.impl.handle.BaseHandleServiceImpl;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @param <IDG> EntityIManager
  * @author xueyi
  */
-public class BaseDomainServiceImpl<Q extends BaseEntity, D extends BaseEntity, IDG extends IBaseRepository<Q, D>> extends BaseHandleServiceImpl<Q, D, IDG> implements IBaseDomainService<Q, D> {
+public class BaseDomainServiceImpl<Q extends BaseEntity, D extends BaseEntity, IDG extends IBaseRepositoryPort<Q, D>> extends BaseHandleServiceImpl<Q, D, IDG> implements IBaseDomainService<Q, D> {
 
     /**
      * 查询数据对象列表

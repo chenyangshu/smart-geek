@@ -15,7 +15,7 @@ import java.util.List;
  * @param <D> Entity
  * @author xueyi
  */
-public interface IBaseRepository<Q extends BaseEntity, D extends BaseEntity> {
+public interface IBaseRepositoryPort<Q extends BaseEntity, D extends BaseEntity> {
 
     /**
      * 查询数据对象列表

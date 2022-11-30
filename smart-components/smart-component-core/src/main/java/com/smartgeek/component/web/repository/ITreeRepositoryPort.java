@@ -12,7 +12,7 @@ import java.util.List;
  * @param <D> Entity
  * @author xueyi
  */
-public interface ITreeRepository<Q extends TreeEntity<D>, D extends TreeEntity<D>> extends IBaseRepository<Q, D> {
+public interface ITreeRepositoryPort<Q extends TreeEntity<D>, D extends TreeEntity<D>> extends IBaseRepositoryPort<Q, D> {
 
     /**
      * 根据Id查询本节点及其所有祖籍节点

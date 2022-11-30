@@ -23,8 +23,6 @@ public class CustomerAddCmdExe implements CommandExecutorI<SingleResponse<String
         //1.做一些check，此处省略
         Customer customer = customerClientConverter.sourceToTarget(cmd);
         customerDomainService.create(customer);
-//        customerE.save();
-//        return ResultData.success("success");
         return SingleResponse.of(customer.getName());
     }
 

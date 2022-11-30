@@ -6,11 +6,11 @@ package com.smartgeek.component.operation;
 @SuppressWarnings("unchecked")
 public abstract class EntityOperations {
 
-  public static <T,ID> EntityUpdater<T,ID> doUpdate(CrudPort<T, ID > crudPort) {
+  public static <T> EntityUpdater<T> doUpdate(IRepositoryPort<T > crudPort) {
     return new EntityUpdater<>(crudPort);
   }
 
-  public static <T,ID>  EntityCreator<T,ID> doCreate(CrudPort<T, ID > crudPort) {
+  public static <T>  EntityCreator<T> doCreate(IRepositoryPort<T > crudPort) {
     return new EntityCreator(crudPort);
   }
 

@@ -1,7 +1,7 @@
 package com.smartgeek.component.web.domainservice.impl.handle;
 
 import com.smartgeek.component.web.model.base.BaseEntity;
-import com.smartgeek.component.web.repository.IBaseRepository;
+import com.smartgeek.component.web.repository.IBaseRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @param <IDG> EntityIManager
  * @author xueyi
  */
-public class BaseHandleServiceImpl<Q extends BaseEntity, D extends BaseEntity, IDG extends IBaseRepository<Q, D>> {
+public class BaseHandleServiceImpl<Q extends BaseEntity, D extends BaseEntity, IDG extends IBaseRepositoryPort<Q, D>> {
 
     @Autowired
     protected IDG baseManager;

@@ -12,5 +12,5 @@ import com.smartgeek.component.web.model.base.SubBaseEntity;
  * @param <SD> SubEntity
  * @author xueyi
  */
-public interface ISubBaseRepository<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, SQ extends BaseEntity, SD extends BaseEntity> extends ISubManager<Q, D, SQ, SD>, IBaseRepository<Q, D> {
+public interface ISubBaseRepositoryPort<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, SQ extends BaseEntity, SD extends BaseEntity> extends ISubRepositoryPort<Q, D, SQ, SD>, IBaseRepositoryPort<Q, D> {
 }

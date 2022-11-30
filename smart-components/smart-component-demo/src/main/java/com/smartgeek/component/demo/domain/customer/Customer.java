@@ -1,11 +1,12 @@
 package com.smartgeek.component.demo.domain.customer;
 
 import com.alibaba.cola.domain.Entity;
+import com.smartgeek.component.web.model.base.BasisEntity;
 import lombok.Data;
 
 @Entity
 @Data
-public class Customer {
+public class Customer extends BasisEntity {
 
 
     private Long customerId;

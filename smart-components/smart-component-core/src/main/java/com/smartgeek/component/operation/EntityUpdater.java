@@ -7,6 +7,7 @@ import com.smartgeek.component.validator.UpdateGroup;
 import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -20,23 +21,23 @@ import java.util.function.Supplier;
  * @date 2022/09/04
  */
 @Slf4j
-public class EntityUpdater<T, ID> extends BaseEntityOperation implements Loader<T, ID>,
+public class EntityUpdater<T> extends BaseEntityOperation implements Loader<T>,
         UpdateHandler<T>, Executor<T> {
 
-    private final CrudPort<T, ID> crudPort;
+    private final IRepositoryPort<T> port;
     private T entity;
     private Consumer<T> successHook = t -> log.info("update success");
     private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
 
-    public EntityUpdater(CrudPort<T, ID> crudPort) {
-        this.crudPort = crudPort;
+    public EntityUpdater(IRepositoryPort<T> port) {
+        this.port = port;
     }
 
     @Override
     public Optional<T> execute() {
         doValidate(this.entity, UpdateGroup.class);
         T save = Try.of(() -> {
-                    crudPort.updateById(entity);
+                    port.updateById(entity);
                     return this.entity;
                 })
                 .onSuccess(successHook)
@@ -47,9 +48,9 @@ public class EntityUpdater<T, ID> extends BaseEntityOperation implements Loader<
 
 
     @Override
-    public UpdateHandler<T> loadById(ID id) {
+    public UpdateHandler<T> loadById(Serializable id) {
         Preconditions.checkArgument(Objects.nonNull(id), "id is null");
-        Optional<T> loadEntity = crudPort.findById(id);
+        Optional<T> loadEntity = port.findById(id);
         this.entity = loadEntity.orElseThrow(() -> new BusinessException(CodeEnum.NotFindError));
         return this;
     }

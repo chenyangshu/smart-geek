@@ -12,5 +12,5 @@ import com.smartgeek.component.web.model.base.SubTreeEntity;
  * @param <SD> SubEntity
  * @author xueyi
  */
-public interface ISubTreeRepository<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, SQ extends BaseEntity, SD extends BaseEntity> extends ISubManager<Q, D, SQ, SD>, ITreeRepository<Q, D> {
+public interface ISubTreeRepositoryPort<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, SQ extends BaseEntity, SD extends BaseEntity> extends ISubRepositoryPort<Q, D, SQ, SD>, ITreeRepositoryPort<Q, D> {
 }

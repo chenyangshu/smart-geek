@@ -19,16 +19,16 @@ import java.util.function.Supplier;
  * @date 2022/09/04
  */
 @Slf4j
-public class EntityCreator<T, ID> extends BaseEntityOperation implements Create<T>, UpdateHandler<T>,
+public class EntityCreator<T > extends BaseEntityOperation implements Create<T>, UpdateHandler<T>,
         Executor<T> {
 
-    private final CrudPort<T, ID> crudPort;
+    private final IRepositoryPort<T> port;
     private T t;
     private Consumer<T> successHook = t -> log.info("save success");
     private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
 
-    public EntityCreator(CrudPort<T, ID> crudPort) {
-        this.crudPort = crudPort;
+    public EntityCreator(IRepositoryPort<T> port) {
+        this.port = port;
     }
 
 
@@ -55,7 +55,7 @@ public class EntityCreator<T, ID> extends BaseEntityOperation implements Create<
     public Optional<T> execute() {
         doValidate(this.t, CreateGroup.class);
         T save = Try.of(() -> {
-                    crudPort.create(t);
+                    port.create(t);
                     return this.t;
                 })
                 .onSuccess(successHook)

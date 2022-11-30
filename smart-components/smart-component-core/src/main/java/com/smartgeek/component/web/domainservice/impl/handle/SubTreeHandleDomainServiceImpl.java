@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.smartgeek.component.constants.BaseConstants;
 import com.smartgeek.component.web.model.base.BaseEntity;
 import com.smartgeek.component.web.model.base.SubTreeEntity;
-import com.smartgeek.component.web.repository.ISubTreeRepository;
+import com.smartgeek.component.web.repository.ISubTreeRepositoryPort;
 import com.smartgeek.component.web.domainservice.IBaseDomainService;
 import com.smartgeek.component.web.domainservice.impl.TreeDomainServiceImpl;
 
@@ -25,7 +25,7 @@ import java.util.Collection;
  * @param <ISS> SubIService
  * @author xueyi
  */
-public abstract class SubTreeHandleDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepository<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends TreeDomainServiceImpl<Q, D, IDG> {
+public abstract class SubTreeHandleDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends TreeDomainServiceImpl<Q, D, IDG> {
 
     @Autowired
     protected ISS subService;
