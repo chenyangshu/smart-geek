@@ -1,6 +1,7 @@
-package com.smartgeek.component.flow.processor;
+package com.smartgeek.component.flow.flow;
 
-import com.smartgeek.component.flow.engine.WorkContext;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
+import com.smartgeek.component.flow.method.BaseMethodExecutor;
 
 import java.lang.reflect.Method;
 
@@ -20,7 +21,7 @@ public class NodeDeciderExecutorBase extends BaseMethodExecutor {
         this.classOfTarget = classOfTarget;
     }
 
-    public String execute(Object flow, Object processResult, WorkContext flowHandleContext) throws Throwable {
+    public String execute(Object flow, Object processResult, FlowHandleContext flowHandleContext) throws Throwable {
         switch (this.parametersType) {
             case NONE:
                 return (String) this.execute(flow, new Object[0]);

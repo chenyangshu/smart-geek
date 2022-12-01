@@ -13,8 +13,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Node(
-        autoExecute = false,
-        enableNodeTx = true
+        autoExecute = false
 )
 public @interface EndNode {
 

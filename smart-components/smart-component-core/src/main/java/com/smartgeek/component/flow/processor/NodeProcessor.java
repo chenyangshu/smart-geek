@@ -1,12 +1,17 @@
 package com.smartgeek.component.flow.processor;
 
-import com.smartgeek.component.flow.work.Work;
+
+import com.smartgeek.component.flow.engine.FlowHandleContext;
 
 /**
- * @author cys
- * @date 2022/11/17 16:26
- * @description:
+ * 节点处理器
+ *
+ * @author treeyschen
+ * @date 2022/09/21
  */
-public interface NodeProcessor<T>  extends Work<T> {
+public interface NodeProcessor<T, R> {
+
+    R execute(FlowHandleContext<T> flowHandleContext);
+
 
 }

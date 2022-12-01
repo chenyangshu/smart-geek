@@ -1,13 +1,13 @@
-package com.smartgeek.component.flow.workflow.rule;
+package com.smartgeek.component.flow.flow;
 
-import cn.hutool.core.util.StrUtil;
 import com.smartgeek.component.flow.annotation.flow.Flow;
 import com.smartgeek.component.flow.annotation.node.EndNode;
 import com.smartgeek.component.flow.annotation.node.Node;
 import com.smartgeek.component.flow.annotation.node.StartNode;
-import com.smartgeek.component.flow.engine.WorkContext;
-import com.smartgeek.component.flow.processor.*;
-import com.smartgeek.component.flow.transaction.WorkFlowTxsHolder;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
+import com.smartgeek.component.flow.processor.NodeProcessorHub;
+import com.smartgeek.component.flow.processor.ProcessorExecutor;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
@@ -23,11 +23,11 @@ import java.lang.reflect.Modifier;
  * @date 2022/9/21 13:15
  * @description:
  */
-public class RuleFlowParser {
+public class FlowParser {
 
-    private static final Logger logger = LoggerFactory.getLogger(RuleFlowParser.class);
+    private static final Logger logger = LoggerFactory.getLogger(FlowParser.class);
 
-    public RuleFlowParser() {
+    public FlowParser() {
     }
 
 
@@ -36,43 +36,38 @@ public class RuleFlowParser {
      *
      * @param flow             流
      * @param nodeProcessorHub 节点处理中心
-     * @param flowTxsHolder    流tx持有人
-     * @return {@link RuleFlowExecutor}
+     * @return {@link FlowExecutor}
      */
-    public static RuleFlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub, WorkFlowTxsHolder flowTxsHolder) {
+    public static FlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub) {
         Class<?> flowClass = AopUtils.getTargetClass(flow);
         logger.debug("解析流程：{}", ClassUtils.getQualifiedName(flowClass));
         Flow flowAnnotation = (Flow) flowClass.getAnnotation(Flow.class);
         String flowName = flowAnnotation.name();
-        if (StrUtil.isEmpty(flowName)) {
+        if (StringUtils.isEmpty(flowName)) {
             flowName = ClassUtils.getShortNameAsProperty(flowClass);
         }
 
 
-        RuleFlowExecutor ruleFlowExecutor = new RuleFlowExecutor(flowName, flowAnnotation.enableFlowTx(), flow);
-        if (flowAnnotation.enableFlowTx()) {
-            ruleFlowExecutor.setFlowTxExecutor(flowTxsHolder.getRequiredFlowTxExecutor(flowName));
-        }
-
+        FlowExecutor flowExecutor = new FlowExecutor(flowName,  flow);
 
         for (Method method : flowClass.getDeclaredMethods()) {
             Node nodeAnnotation = AnnotatedElementUtils.findMergedAnnotation(method, Node.class);
 
             if (nodeAnnotation != null) {
                 NodeExecutor nodeExecutor = parseNode(nodeAnnotation, method, nodeProcessorHub);
-                ruleFlowExecutor.addNode(nodeExecutor);
+                flowExecutor.addNode(nodeExecutor);
                 if (method.isAnnotationPresent(StartNode.class)) {
-                    ruleFlowExecutor.setStartNode(nodeExecutor.getNodeName());
+                    flowExecutor.setStartNode(nodeExecutor.getNodeName());
                 }
 
                 if (method.isAnnotationPresent(EndNode.class)) {
-                    ruleFlowExecutor.addEndNode(nodeExecutor.getNodeName());
+                    flowExecutor.addEndNode(nodeExecutor.getNodeName());
                 }
             }
         }
 
-        ruleFlowExecutor.validate();
-        return ruleFlowExecutor;
+        flowExecutor.validate();
+        return flowExecutor;
 
     }
 
@@ -88,16 +83,16 @@ public class RuleFlowParser {
     private static NodeExecutor parseNode(Node nodeAnnotation, Method method, NodeProcessorHub nodeProcessorHub) {
         logger.debug("解析流程节点：node={}，method={}", nodeAnnotation, method);
         String nodeName = nodeAnnotation.name();
-        if (StrUtil.isEmpty(nodeName)) {
+        if (StringUtils.isEmpty(nodeName)) {
             nodeName = method.getName();
         }
 
         ProcessorExecutor processorExecutor = null;
-        if (StrUtil.isNotEmpty(nodeAnnotation.handler())) {
+        if (StringUtils.isNotEmpty(nodeAnnotation.handler())) {
             processorExecutor = nodeProcessorHub.getRequiredProcessorExecutor(nodeAnnotation.handler());
         }
 
-        NodeExecutor nodeExecutor = new NodeExecutor(nodeName, processorExecutor, nodeAnnotation.autoExecute(), nodeAnnotation.enableNodeTx());
+        NodeExecutor nodeExecutor = new NodeExecutor(nodeName, processorExecutor, nodeAnnotation.autoExecute());
         nodeExecutor.setNodeDeciderExecutor(parseNodeDecider(method, processorExecutor));
         nodeExecutor.validate();
         return nodeExecutor;
@@ -130,7 +125,7 @@ public class RuleFlowParser {
 
             ResolvableType resolvableType;
             if (parameterTypes.length == 1) {
-                if (parameterTypes[0] == WorkContext.class) {
+                if (parameterTypes[0] == FlowHandleContext.class) {
                     parametersType = ParametersType.ONLY_TARGET_CONTEXT;
                     resolvableType = ResolvableType.forMethodParameter(method, 0);
                     classOfTarget = resolvableType.getGeneric(new int[]{0}).resolve(Object.class);
@@ -158,7 +153,7 @@ public class RuleFlowParser {
                     throw new IllegalArgumentException("节点决策器" + ClassUtils.getQualifiedMethodName(method) + "的非TargetContext入参类型必须能被其处理器返回类型赋值");
                 }
 
-                if (parameterTypes[1] != WorkContext.class) {
+                if (parameterTypes[1] != FlowHandleContext.class) {
                     throw new IllegalArgumentException("节点决策器" + ClassUtils.getQualifiedMethodName(method) + "的第二个参数类型必须是TargetContext");
                 }
 

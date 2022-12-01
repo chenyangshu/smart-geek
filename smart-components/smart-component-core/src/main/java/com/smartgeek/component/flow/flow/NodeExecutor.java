@@ -1,14 +1,13 @@
-package com.smartgeek.component.flow.processor;
+package com.smartgeek.component.flow.flow;
 
-import com.smartgeek.component.flow.engine.WorkContext;
-import lombok.AllArgsConstructor;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
+import com.smartgeek.component.flow.processor.ProcessorExecutor;
 
 /**
  * @author cys
- * @date 2022/11/16 14:05
+ * @date 2022/9/21 14:08
  * @description:
  */
-@AllArgsConstructor
 public class NodeExecutor {
 
     private String nodeName;
@@ -17,21 +16,18 @@ public class NodeExecutor {
      * 自动执行
      */
     private boolean autoExecute;
-    private boolean enableNodeTx;
     private NodeDeciderExecutorBase nodeDeciderExecutor;
 
-    public NodeExecutor(String nodeName, ProcessorExecutor processorExecutor, boolean autoExecute, boolean enableNodeTx) {
+    public NodeExecutor(String nodeName, ProcessorExecutor processorExecutor, boolean autoExecute) {
         this.nodeName = nodeName;
         this.processorExecutor = processorExecutor;
         this.autoExecute = autoExecute;
-        this.enableNodeTx = enableNodeTx;
     }
 
-    public String execute(Object flow, WorkContext flowHandleContext) throws Throwable {
+    public String execute(Object flow, FlowHandleContext flowHandleContext) throws Throwable {
         Object processResult = null;
         if (null != this.processorExecutor) {
-//            processResult = this.processorExecutor.execute(flowHandleContext);
-            this.processorExecutor.execute(flowHandleContext);
+            processResult = this.processorExecutor.execute(flowHandleContext);
         }
 
         return this.nodeDeciderExecutor.execute(flow, processResult, flowHandleContext);
@@ -49,9 +45,7 @@ public class NodeExecutor {
         return this.autoExecute;
     }
 
-    public boolean isEnableNodeTx() {
-        return this.enableNodeTx;
-    }
+
 
     public String getNodeName() {
         return this.nodeName;
@@ -70,5 +64,5 @@ public class NodeExecutor {
             throw new IllegalStateException("节点" + this.nodeName + "内部要素不全");
         }
     }
-    
+
 }

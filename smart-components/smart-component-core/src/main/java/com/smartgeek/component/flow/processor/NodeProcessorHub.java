@@ -3,29 +3,36 @@ package com.smartgeek.component.flow.processor;
 import com.smartgeek.component.flow.annotation.processor.Processor;
 import com.smartgeek.component.flow.exception.FlowErrorCode;
 import com.smartgeek.component.flow.exception.FlowException;
-import com.smartgeek.component.flow.work.Work;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 /**
- * @author cys
- * @date 2022/11/16 15:56
- * @description:
+ * 节点处理中心
+ *
+ * @author treeyschen
+ * @date 2022/09/21
  */
 @Component
-@RequiredArgsConstructor
 public class NodeProcessorHub {
-    private final ApplicationContext applicationContext;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * 处理器执行程序映射
      */
     private Map<String, ProcessorExecutor> processorExecutorMap = new ConcurrentHashMap();
+
+
+    public NodeProcessorHub() {
+    }
 
 
     @PostConstruct
@@ -46,7 +53,7 @@ public class NodeProcessorHub {
      * 获取处理器通过bean名称
      *
      * @param beanName bean名字
-     * @return {@link Work}
+     * @return {@link NodeProcessor}
      */
     protected NodeProcessor getProcessorByBeanName(String beanName) {
         Object processor = this.applicationContext.getBean(beanName);
@@ -62,9 +69,18 @@ public class NodeProcessorHub {
      */
     protected void checkNodeProcessor(Object processor) {
         //是否实现NodeProcessor
-        if (!(processor instanceof Work)) {
-            throw new FlowException(FlowErrorCode.NODE_PROCESSOR_NOT_IMPLEMENT_INTERFACE.getErrCode(), "[Flow-Engine] 流程节点处理器" + processor.getClass().getName() + "没有实现处理器接口" + Work.class.getName());
+        if (!(processor instanceof NodeProcessor)) {
+            throw new FlowException(FlowErrorCode.NODE_PROCESSOR_NOT_IMPLEMENT_INTERFACE.getErrCode(), "[Flow-Engine] 流程节点处理器" + processor.getClass().getName() + "没有实现处理器接口" + NodeProcessor.class.getName());
         }
+    }
+
+    /**
+     * 获得处理器名称
+     *
+     * @return {@link Set}<{@link String}>
+     */
+    public Set<String> getProcessorNames() {
+        return this.processorExecutorMap.keySet();
     }
 
 

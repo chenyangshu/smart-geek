@@ -1,6 +1,6 @@
 package com.smartgeek.component.flow.exception;
 
-import com.smartgeek.component.flow.engine.WorkContext;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
 import lombok.Data;
 
 /**
@@ -16,10 +16,10 @@ public class FlowExecutionException extends Exception{
 
     private String flowName;
     private String nodeName;
-    private WorkContext context;
+    private FlowHandleContext context;
 
 
-    public FlowExecutionException(String flowName, String nodeName, WorkContext context) {
+    public FlowExecutionException(String flowName, String nodeName, FlowHandleContext context) {
         super(getMsg(flowName, nodeName));
         this.flowName = flowName;
         this.nodeName = nodeName;

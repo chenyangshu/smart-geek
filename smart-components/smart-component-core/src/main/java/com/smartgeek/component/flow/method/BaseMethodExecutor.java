@@ -1,4 +1,4 @@
-package com.smartgeek.component.flow.processor;
+package com.smartgeek.component.flow.method;
 
 import com.smartgeek.component.flow.annotation.node.NextNodeRoute;
 import com.smartgeek.component.flow.annotation.node.ProcessNode;

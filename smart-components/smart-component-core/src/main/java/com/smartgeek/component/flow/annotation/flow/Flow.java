@@ -20,17 +20,7 @@ public @interface Flow {
      * 流程名称（默认使用被注解的类名，首字母小写）
      */
     String name();
-    /**
-     * 是否开启流程事务（默认开启）
-     */
-    boolean enableFlowTx() default true;
 
-
-    /**
-     * 指定事务管理器的bean name
-     * 用于多个数据源情况下，不指定则使用默认事务管理器
-     */
-    String txManager() default "";
     /**
      * 当前流程的描述
      *

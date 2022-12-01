@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.*;
  * @date 2022/11/27 19:52
  * @description:
  */
-
-@RequestMapping("/api/customer")
 public interface CustomerClient {
 
-    @PostMapping("/add")
+    @PostMapping("/api/customer/add")
     SingleResponse<String> addCustomer(@RequestBody @Validated CustomerAddCmd customerAddCmd);
 
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/api/customer/list")
     MultiResponse<CustomerCO> listCustomerByName(@RequestParam String name);
 }

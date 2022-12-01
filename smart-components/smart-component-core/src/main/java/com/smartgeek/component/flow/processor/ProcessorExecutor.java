@@ -1,8 +1,8 @@
 package com.smartgeek.component.flow.processor;
 
 
-import com.smartgeek.component.flow.engine.WorkContext;
-import com.smartgeek.component.flow.work.Work;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
+import com.smartgeek.component.flow.method.BaseMethodExecutor;
 
 import java.lang.reflect.Method;
 
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @author treeyschen
  * @date 2022/09/21
  */
-public class ProcessorExecutor implements Work{
+public class ProcessorExecutor {
 
     /**
      * 处理器名字
@@ -48,8 +48,8 @@ public class ProcessorExecutor implements Work{
      * @return {@link Object}
      * @throws Throwable throwable
      */
-    public void execute(WorkContext flowHandleContext)  {
-        this.processor.execute(flowHandleContext);
+    public Object execute(FlowHandleContext flowHandleContext) throws Throwable {
+        return this.processor.execute(flowHandleContext);
     }
 
 
@@ -100,7 +100,7 @@ public class ProcessorExecutor implements Work{
             this.classOfTarget = classOfTarget;
         }
 
-        public Object execute(Object processor, WorkContext flowHandleContext) throws Throwable {
+        public Object execute(Object processor, FlowHandleContext flowHandleContext) throws Throwable {
             return this.execute(processor, new Object[]{flowHandleContext});
         }
 

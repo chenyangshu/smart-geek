@@ -1,15 +1,14 @@
 package com.smartgeek.component.flow.processor;
 
 import com.smartgeek.component.flow.annotation.processor.Processor;
-import com.smartgeek.component.flow.engine.WorkContext;
-import com.smartgeek.component.flow.work.Work;
+import com.smartgeek.component.flow.engine.FlowHandleContext;
 import io.vavr.control.Try;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -48,7 +47,7 @@ public class ProcessorParser {
         final String processorNameFinal = processorName;
         ProcessorExecutor processorExecutor = new ProcessorExecutor(processorName, processor);
         Try.run(() -> {
-            Method method = processorClass.getDeclaredMethod("execute", WorkContext.class);
+            Method method = processorClass.getDeclaredMethod("execute", FlowHandleContext.class);
             processorExecutor.setMethodExecutor(parseProcessorMethod(method));
         }).onFailure(Exception.class, item -> {
             log.warn("处理器:{}-解析处理器方法异常", processorNameFinal);
@@ -73,7 +72,7 @@ public class ProcessorParser {
             Class[] parameterTypes = method.getParameterTypes();
             if (parameterTypes.length != 1) {
                 throw new IllegalArgumentException("处理器方法" + ClassUtils.getQualifiedMethodName(method) + "入参必须是（FlowHandleContext）");
-            } else if (parameterTypes[0] != WorkContext.class) {
+            } else if (parameterTypes[0] != FlowHandleContext.class) {
                 throw new IllegalArgumentException("处理器方法" + ClassUtils.getQualifiedMethodName(method) + "入参必须是（FlowHandleContext）");
             } else {
                 ResolvableType resolvableType = ResolvableType.forMethodParameter(method, 0);
