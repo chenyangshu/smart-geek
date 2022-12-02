@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.smartgeek.component.flow.DefaultWorkFlowEngineConfiguration,\
-  com.smartgeek.component.flow.SmartFlowEngineConfiguration
+  com.smartgeek.component.flow.SmartFlowPersistenceAutoConfiguration,\
+  com.smartgeek.component.flow.SmartFlowEngineConfiguration,\
+  com.smartgeek.component.flow.SmartFlowCommonResourceHolderAutoConfiguration

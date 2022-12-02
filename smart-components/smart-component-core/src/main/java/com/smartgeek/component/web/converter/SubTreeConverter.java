@@ -12,7 +12,7 @@ import java.util.List;
  * @param <Q> Query
  * @param <D> Entity
  * @param <P> Po
- * @author xueyi
+ * @author cys
  */
 public interface SubTreeConverter<Q extends P, D extends P, P extends TreeEntity<D>> extends TreeConverter<Q, D, P> {
 

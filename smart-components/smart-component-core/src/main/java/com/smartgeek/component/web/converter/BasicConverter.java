@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @param <D> Entity
  * @param <P> Po
- * @author xueyi
+ * @author cys
  */
 public interface BasicConverter<D , P > {
 

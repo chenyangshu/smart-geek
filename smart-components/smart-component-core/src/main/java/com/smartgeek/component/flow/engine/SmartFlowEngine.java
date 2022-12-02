@@ -14,6 +14,7 @@ import org.springframework.util.ClassUtils;
 public class SmartFlowEngine implements FlowEngine {
 
     private FlowsHub flowsHub;
+
     public SmartFlowEngine(FlowsHub flowsHub) {
         this.flowsHub = flowsHub;
     }
@@ -61,6 +62,5 @@ public class SmartFlowEngine implements FlowEngine {
         }
 
     }
-
 
 }

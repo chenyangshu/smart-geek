@@ -10,7 +10,7 @@ import java.util.Collection;
  * 数据层 基类通用数据处理
  *
  * @param <P> Po
- * @author xueyi
+ * @author cys
  */
 public interface BasicMapper<P extends BasisEntity> extends BaseMapper<P> {
 

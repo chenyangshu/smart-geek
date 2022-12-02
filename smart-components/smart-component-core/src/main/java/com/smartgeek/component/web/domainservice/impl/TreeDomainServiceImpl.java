@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * @param <Q>   Query
  * @param <D>   Entity
  * @param <IDG> EntityIManager
- * @author xueyi
+ * @author cys
  */
 public class TreeDomainServiceImpl<Q extends TreeEntity<D>, D extends TreeEntity<D>, IDG extends ITreeRepositoryPort<Q, D>> extends TreeHandleDomainServiceImpl<Q, D, IDG> implements ITreeDomainService<Q, D> {
 

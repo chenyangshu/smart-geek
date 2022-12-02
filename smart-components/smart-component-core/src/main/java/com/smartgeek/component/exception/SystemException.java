@@ -1,7 +1,7 @@
 package com.smartgeek.component.exception;
 
 /**
- * @author gim
+ * @author cys
  **/
 public class SystemException extends RuntimeException {
 

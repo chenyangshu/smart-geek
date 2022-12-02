@@ -23,7 +23,7 @@ import java.util.List;
  * @param <SQ>  SubQuery
  * @param <SD>  SubEntity
  * @param <ISS> SubIService
- * @author xueyi
+ * @author cys
  */
 public abstract class SubBaseDomainServiceImpl<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, IDG extends ISubBaseRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubBaseHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubBaseDomainService<Q, D, SQ, SD> {
 

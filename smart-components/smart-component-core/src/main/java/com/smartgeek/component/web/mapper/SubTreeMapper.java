@@ -12,7 +12,7 @@ import com.smartgeek.component.web.model.base.SubTreeEntity;
  * @param <SQ> SubQuery
  * @param <SD> SubEntity
  * @param <SP> SubPo
- * @author xueyi
+ * @author cys
  */
 public interface SubTreeMapper<Q extends P, D extends P, P extends SubTreeEntity<D, SD>, SQ extends SP, SD extends SP, SP extends BaseEntity> extends TreeMapper<Q, D, P> {
 }

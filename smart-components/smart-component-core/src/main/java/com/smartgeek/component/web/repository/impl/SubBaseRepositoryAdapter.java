@@ -26,7 +26,7 @@ import java.util.List;
  * @param <SD>  SubEntity
  * @param <SP>  SubPo
  * @param <SPM> SubPoMapper
- * @author xueyi
+ * @author cys
  */
 public abstract class SubBaseRepositoryAdapter<Q extends P, D extends P, P extends SubBaseEntity<SD>, PM extends SubBaseMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubBaseHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubBaseRepositoryPort<Q, D, SQ, SD> {
 

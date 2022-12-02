@@ -2,8 +2,8 @@ package com.smartgeek.component.operation;
 
 import cn.hutool.core.collection.CollUtil;
 import com.smartgeek.component.exception.ValidationException;
-import com.smartgeek.component.validator.ValidateGroup;
-import com.smartgeek.component.validator.ValidateResult;
+import com.smartgeek.component.validate.ValidateGroup;
+import com.smartgeek.component.validate.ValidateResult;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

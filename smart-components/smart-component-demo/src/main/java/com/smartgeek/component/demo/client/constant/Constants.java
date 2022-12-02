@@ -1,0 +1,29 @@
+package com.smartgeek.component.demo.client.constant;
+
+/**
+ * Constants
+ *
+ * @author cys
+ * @date 2018-01-07 1:23 AM
+ */
+public class Constants {
+
+
+    public static final String BIZ_DEMO = "BIZ_DEMO";
+    public static final String USE_CASE_PAYMENT = "USE_CASE_PAYMENT";
+    public static final String SCENARIO_ALI_PAYMENT = "SCENARIO_ALI_PAYMENT";
+    public static final String SCENARIO_WECHAT_PAYMENT = "SCENARIO_WECHAT_PAYMENT";
+
+
+    public static final String BIZ_1 = "BIZ_ONE";
+    public static final String USE_CASE_1 = "USE_CASE_ONE";
+    public static final String SCENARIO_1 = "SCENARIO_ONE";
+    public static final String BIZ_2 = "BIZ_TWO";
+
+
+    public static final String SOURCE_AD = "Advertisement";
+    public static final String SOURCE_WB = "Web site";
+    public static final String SOURCE_RFQ = "Request For Quota";
+    public static final String SOURCE_MARKETING = "Marketing";
+    public static final String SOURCE_OFFLINE = "Off Line";
+}

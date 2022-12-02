@@ -22,7 +22,7 @@ import java.util.List;
  * @param <D>  Entity
  * @param <P>  Po
  * @param <PM> PoMapper
- * @author xueyi
+ * @author cys
  */
 public class BaseRepositoryAdapter<Q extends P, D extends P, P extends BaseEntity, PM extends BaseMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends BaseHandleRepositoryAdapter<Q, D, P, PM, CT> implements IBaseRepositoryPort<Q, D> {
 

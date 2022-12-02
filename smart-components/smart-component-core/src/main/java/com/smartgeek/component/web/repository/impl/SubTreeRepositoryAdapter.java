@@ -27,7 +27,7 @@ import java.util.List;
  * @param <SD>  SubEntity
  * @param <SP>  SubPo
  * @param <SPM> SubPoMapper
- * @author xueyi
+ * @author cys
  */
 public abstract class SubTreeRepositoryAdapter<Q extends P, D extends P, P extends SubTreeEntity<D, SD>, PM extends SubTreeMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends SubTreeHandleRepositoryAdapter<Q, D, P, PM, CT, SQ, SD, SP, SPM, SCT> implements ISubTreeRepositoryPort<Q, D, SQ, SD> {
 

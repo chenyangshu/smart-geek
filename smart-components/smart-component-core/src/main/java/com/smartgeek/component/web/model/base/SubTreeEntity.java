@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @param <D>  Entity
  * @param <SD> SubEntity
- * @author xueyi
+ * @author cys
  */
 public class SubTreeEntity<D, SD> extends TreeEntity<D> {
 

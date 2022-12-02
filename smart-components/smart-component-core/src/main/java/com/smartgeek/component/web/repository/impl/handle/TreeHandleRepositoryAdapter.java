@@ -12,7 +12,7 @@ import com.smartgeek.component.web.repository.impl.BaseRepositoryAdapter;
  * @param <D>  Entity
  * @param <P>  Po
  * @param <PM> PoMapper
- * @author xueyi
+ * @author cys
  */
 public class TreeHandleRepositoryAdapter<Q extends P, D extends P, P extends TreeEntity<D>, PM extends TreeMapper<Q, D, P>, CT extends BaseConverter<Q, D, P>> extends BaseRepositoryAdapter<Q, D, P, PM, CT> {
 }

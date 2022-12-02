@@ -18,7 +18,7 @@ import java.util.List;
  * @param <Q>   Query
  * @param <D>   Entity
  * @param <IDG> EntityIManager
- * @author xueyi
+ * @author cys
  */
 public class BaseDomainServiceImpl<Q extends BaseEntity, D extends BaseEntity, IDG extends IBaseRepositoryPort<Q, D>> extends BaseHandleServiceImpl<Q, D, IDG> implements IBaseDomainService<Q, D> {
 

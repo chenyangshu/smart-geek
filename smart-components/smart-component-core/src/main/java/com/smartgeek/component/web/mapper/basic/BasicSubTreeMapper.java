@@ -7,7 +7,7 @@ import com.smartgeek.component.web.model.base.SubTreeEntity;
  * 数据层 主子树型基类数据处理
  * 仅用于基类调用 禁止被继承使用
  *
- * @author xueyi
+ * @author cys
  */
 public interface BasicSubTreeMapper<D, S> extends BaseMapper<SubTreeEntity<D, S>> {
 }

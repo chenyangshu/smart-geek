@@ -1,9 +1,13 @@
 package com.smartgeek.component.flow.flow;
 
 
+import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.smartgeek.component.flow.engine.FlowHandleContext;
 import com.smartgeek.component.flow.exception.FlowExecutionException;
+import com.smartgeek.component.flow.persistence.FlowCommonResourceHolder;
+import com.smartgeek.component.flow.persistence.FlowExeRecord;
+import com.smartgeek.component.flow.transaction.FlowTxExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,15 +29,18 @@ public class FlowExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(FlowExecutor.class);
     private String flowName;
+    private boolean enableFlowTx;
     private Object flow;
     private String startNode;
     private Set<String> endNodes = new HashSet();
     private Map<String, NodeExecutor> nodeExecutorMap = new ConcurrentHashMap();
+    private FlowTxExecutor flowTxExecutor;
     private Class classOfTarget;
 
 
-    public FlowExecutor(String flowName, Object flow) {
+    public FlowExecutor(String flowName, boolean enableFlowTx, Object flow) {
         this.flowName = flowName;
+        this.enableFlowTx = enableFlowTx;
         this.flow = flow;
     }
 
@@ -90,37 +97,66 @@ public class FlowExecutor {
 
 
     private void beforeFlow(FlowHandleContext flowHandleContext) {
-
+        if (this.enableFlowTx) {
+            this.flowTxExecutor.createTx();
+        }
 
     }
 
 
     private void afterFlow(FlowHandleContext flowHandleContext) {
-
+        if (this.enableFlowTx && this.flowTxExecutor.hasTx()) {
+            this.flowTxExecutor.commitTx();
+        }
 
     }
 
 
     private void beforeNode(NodeExecutor nodeExecutor) {
+        if (this.enableFlowTx && nodeExecutor.isEnableNodeTx()) {
+            if (this.flowTxExecutor.hasTx()) {
+                this.flowTxExecutor.commitTx();
+            }
 
+            this.flowTxExecutor.createTx();
+        }
 
     }
 
     private void afterNode(NodeExecutor nodeExecutor) {
+        if (this.enableFlowTx && nodeExecutor.isEnableNodeTx()) {
+            this.flowTxExecutor.commitTx();
+        }
 
+        if (this.enableFlowTx && !this.flowTxExecutor.hasTx()) {
+            this.flowTxExecutor.createTx();
+        }
 
     }
 
 
     private void recordFailedFlowNode(String currNode, NodeExecutor currNodeExecutor, FlowHandleContext flowHandleContext) {
+        if (this.enableFlowTx && currNode != null && currNodeExecutor != null) {
+            if (FlowCommonResourceHolder.isFlowRepositoryEnabled() && currNodeExecutor.isEnableNodeTx()) {
+                FlowExeRecord record = new FlowExeRecord();
+                record.setFlowId(this.flow.getClass().getName());
+                record.setFlowName(this.flowName);
+                record.setNodeName(currNode);
+                record.setAppId(SpringUtil.getApplicationContext().getEnvironment().getProperty("spring.application.name", ""));
+                record.setContext(flowHandleContext);
+                FlowCommonResourceHolder.getFlowRepository().asynAddFailedRecord(record);
+            }
 
+        }
     }
 
 
     private void afterThrowing(Throwable throwable, FlowHandleContext flowHandleContext, String currNode, NodeExecutor currNodeExecutor) {
         try {
             log.error(String.format("[flow-engine] execute flow failed, flow=%s, currNode=%s, context=%s", this.flowName, currNode, JSONUtil.toJsonStr(flowHandleContext)), throwable);
-
+            if (this.enableFlowTx && this.flowTxExecutor.hasTx()) {
+                this.flowTxExecutor.rollbackTx();
+            }
         } finally {
             this.recordFailedFlowNode(currNode, currNodeExecutor, flowHandleContext);
         }
@@ -152,7 +188,15 @@ public class FlowExecutor {
         this.endNodes.add(endNode);
     }
 
-
+    public void setFlowTxExecutor(FlowTxExecutor flowTxExecutor) {
+        if (!this.enableFlowTx) {
+            throw new IllegalStateException("流程" + this.flowName + "的enableFlowTx属性为关闭状态，不能设置流程事务");
+        } else if (this.flowTxExecutor != null) {
+            throw new IllegalStateException("流程" + this.flowName + "的流程事务执行器已被设置，不能重复设置");
+        } else {
+            this.flowTxExecutor = flowTxExecutor;
+        }
+    }
 
     public String getFlowName() {
         return this.flowName;
@@ -177,6 +221,14 @@ public class FlowExecutor {
             } else if (this.endNodes.isEmpty()) {
                 throw new IllegalStateException("流程" + this.flowName + "没有结束节点");
             } else {
+                if (this.enableFlowTx) {
+                    if (this.flowTxExecutor == null) {
+                        throw new IllegalStateException("流程" + this.flowName + "的enableFlowTx属性为开启状态，但未设置对应的流程事务");
+                    }
+                } else if (this.flowTxExecutor != null) {
+                    throw new IllegalStateException("流程" + this.flowName + "的enableFlowTx属性为关闭状态，但设置了流程事务");
+                }
+
                 Set<Class> processorTargetClasses = this.nodeExecutorMap.values().stream().map(NodeExecutor::getClassOfTargetOfProcessor).filter(Objects::nonNull).collect(Collectors.toSet());
                 if (processorTargetClasses.size() > 1) {
                     throw new IllegalStateException("流程" + this.flowName + "内节点的处理器的目标对象类型不统一");

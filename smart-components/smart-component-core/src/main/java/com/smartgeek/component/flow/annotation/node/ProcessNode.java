@@ -27,6 +27,11 @@ public @interface ProcessNode {
     )
     String handler() default "";
 
+    @AliasFor(
+            annotation = Node.class,
+            attribute = "enableNodeTx"
+    )
+    boolean enableNodeTx() default true;
 
     String desc() default "";
 

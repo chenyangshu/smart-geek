@@ -3,7 +3,7 @@ package com.smartgeek.component.constants;
 /**
  * sql 通用常量
  *
- * @author xueyi
+ * @author cys
  */
 public class SqlConstants {
 

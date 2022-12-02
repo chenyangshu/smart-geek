@@ -12,7 +12,7 @@ import java.util.List;
  * @param <Q> Query
  * @param <D> Entity
  * @param <P> Po
- * @author xueyi
+ * @author cys
  */
 public interface SubBaseConverter<Q extends P, D extends P, P extends BaseEntity> extends BaseConverter<Q, D, P> {
 

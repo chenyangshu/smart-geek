@@ -7,6 +7,7 @@ import com.smartgeek.component.flow.annotation.node.StartNode;
 import com.smartgeek.component.flow.engine.FlowHandleContext;
 import com.smartgeek.component.flow.processor.NodeProcessorHub;
 import com.smartgeek.component.flow.processor.ProcessorExecutor;
+import com.smartgeek.component.flow.transaction.FlowTxsHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ import java.lang.reflect.Modifier;
  * @description:
  */
 public class FlowParser {
-
     private static final Logger logger = LoggerFactory.getLogger(FlowParser.class);
 
     public FlowParser() {
@@ -36,9 +36,10 @@ public class FlowParser {
      *
      * @param flow             流
      * @param nodeProcessorHub 节点处理中心
+     * @param flowTxsHolder    流tx持有人
      * @return {@link FlowExecutor}
      */
-    public static FlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub) {
+    public static FlowExecutor parseFlow(Object flow, NodeProcessorHub nodeProcessorHub, FlowTxsHolder flowTxsHolder) {
         Class<?> flowClass = AopUtils.getTargetClass(flow);
         logger.debug("解析流程：{}", ClassUtils.getQualifiedName(flowClass));
         Flow flowAnnotation = (Flow) flowClass.getAnnotation(Flow.class);
@@ -48,7 +49,11 @@ public class FlowParser {
         }
 
 
-        FlowExecutor flowExecutor = new FlowExecutor(flowName,  flow);
+        FlowExecutor flowExecutor = new FlowExecutor(flowName, flowAnnotation.enableFlowTx(), flow);
+        if (flowAnnotation.enableFlowTx()) {
+            flowExecutor.setFlowTxExecutor(flowTxsHolder.getRequiredFlowTxExecutor(flowName));
+        }
+
 
         for (Method method : flowClass.getDeclaredMethods()) {
             Node nodeAnnotation = AnnotatedElementUtils.findMergedAnnotation(method, Node.class);
@@ -92,7 +97,7 @@ public class FlowParser {
             processorExecutor = nodeProcessorHub.getRequiredProcessorExecutor(nodeAnnotation.handler());
         }
 
-        NodeExecutor nodeExecutor = new NodeExecutor(nodeName, processorExecutor, nodeAnnotation.autoExecute());
+        NodeExecutor nodeExecutor = new NodeExecutor(nodeName, processorExecutor, nodeAnnotation.autoExecute(), nodeAnnotation.enableNodeTx());
         nodeExecutor.setNodeDeciderExecutor(parseNodeDecider(method, processorExecutor));
         nodeExecutor.validate();
         return nodeExecutor;

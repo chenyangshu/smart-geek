@@ -2,8 +2,7 @@ package com.smartgeek.component.web.model.base;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.smartgeek.component.web.validate.V_E;
-
+import com.smartgeek.component.validate.UpdateGroup;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.Map;
 /**
  * Basis 基类
  *
- * @author xueyi
+ * @author cys
  */
 public class BasisEntity implements Serializable {
 
@@ -31,7 +30,7 @@ public class BasisEntity implements Serializable {
     @TableField(exist = false)
     private Map<String, Object> params;
 
-    @NotNull(message = "id不能为空", groups = {V_E.class})
+    @NotNull(message = "id不能为空", groups = {UpdateGroup.class})
     public Long getId() {
         return id;
     }

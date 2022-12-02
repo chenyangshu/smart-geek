@@ -1,13 +1,13 @@
 package com.smartgeek.component.exception;
 
 
-import com.smartgeek.component.validator.ValidateResult;
+import com.smartgeek.component.validate.ValidateResult;
 import lombok.Getter;
 
 import java.util.List;
 
 /**
- * @author gim
+ * @author cys
  */
 public class ValidationException extends RuntimeException {
   @Getter

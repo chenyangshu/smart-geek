@@ -2,6 +2,7 @@ package com.smartgeek.component.flow.flow;
 
 import com.smartgeek.component.flow.annotation.flow.Flow;
 import com.smartgeek.component.flow.processor.NodeProcessorHub;
+import com.smartgeek.component.flow.transaction.FlowTxsHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,9 @@ public class FlowsHub {
     @Autowired
     private NodeProcessorHub nodeProcessorHub;
 
+    @Autowired
+    private FlowTxsHolder flowTxsHolder;
+
     private Map<String, FlowExecutor> flowExecutorMap = new ConcurrentHashMap();
 
 
@@ -35,7 +39,7 @@ public class FlowsHub {
         String[] flowBeanNames = this.applicationContext.getBeanNamesForAnnotation(Flow.class);
 
         for (String flowBeanName : flowBeanNames) {
-            FlowExecutor flowExecutor = FlowParser.parseFlow(this.applicationContext.getBean(flowBeanName), this.nodeProcessorHub);
+            FlowExecutor flowExecutor = FlowParser.parseFlow(this.applicationContext.getBean(flowBeanName), this.nodeProcessorHub, this.flowTxsHolder);
             if (this.flowExecutorMap.containsKey(flowExecutor.getFlowName())) {
                 throw new RuntimeException("存在重名的流程" + flowExecutor.getFlowName());
             }

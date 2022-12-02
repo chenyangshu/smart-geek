@@ -9,19 +9,20 @@ import com.smartgeek.component.flow.processor.ProcessorExecutor;
  * @description:
  */
 public class NodeExecutor {
-
     private String nodeName;
     private ProcessorExecutor processorExecutor;
     /**
      * 自动执行
      */
     private boolean autoExecute;
+    private boolean enableNodeTx;
     private NodeDeciderExecutorBase nodeDeciderExecutor;
 
-    public NodeExecutor(String nodeName, ProcessorExecutor processorExecutor, boolean autoExecute) {
+    public NodeExecutor(String nodeName, ProcessorExecutor processorExecutor, boolean autoExecute, boolean enableNodeTx) {
         this.nodeName = nodeName;
         this.processorExecutor = processorExecutor;
         this.autoExecute = autoExecute;
+        this.enableNodeTx = enableNodeTx;
     }
 
     public String execute(Object flow, FlowHandleContext flowHandleContext) throws Throwable {
@@ -45,7 +46,9 @@ public class NodeExecutor {
         return this.autoExecute;
     }
 
-
+    public boolean isEnableNodeTx() {
+        return this.enableNodeTx;
+    }
 
     public String getNodeName() {
         return this.nodeName;

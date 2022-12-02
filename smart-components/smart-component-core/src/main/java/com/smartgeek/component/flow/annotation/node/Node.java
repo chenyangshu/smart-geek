@@ -18,5 +18,7 @@ public @interface Node {
 
     boolean autoExecute() default true;
 
+    boolean enableNodeTx() default false;
+
     NextNodeRoute[] nextNodeRoute() default {};
 }

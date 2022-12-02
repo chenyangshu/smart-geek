@@ -23,7 +23,7 @@ import java.util.Collection;
  * @param <SQ>  SubQuery
  * @param <SD>  SubEntity
  * @param <ISS> SubIService
- * @author xueyi
+ * @author cys
  */
 public abstract class SubTreeHandleDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends TreeDomainServiceImpl<Q, D, IDG> {
 

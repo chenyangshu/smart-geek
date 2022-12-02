@@ -1,6 +1,6 @@
 package com.smartgeek.component.demo.infrastructure.converter;
 
-import com.smartgeek.component.demo.client.dto.CustomerCO;
+import com.smartgeek.component.demo.client.dto.clientobject.CustomerCO;
 import com.smartgeek.component.demo.domain.customer.Customer;
 import com.smartgeek.component.demo.infrastructure.tunnel.db.po.CustomerPO;
 import com.smartgeek.component.mapping.ModelMappingI;

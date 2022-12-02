@@ -8,7 +8,7 @@ import java.util.List;
  * Tree 基类
  *
  * @param <D> Entity
- * @author xueyi
+ * @author cys
  */
 public class TreeEntity<D> extends BaseEntity {
 

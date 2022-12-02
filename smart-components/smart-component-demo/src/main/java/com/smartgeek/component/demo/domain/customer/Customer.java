@@ -1,5 +1,6 @@
 package com.smartgeek.component.demo.domain.customer;
 
+
 import com.alibaba.cola.domain.Entity;
 import com.smartgeek.component.web.model.base.BasisEntity;
 import lombok.Data;
@@ -15,7 +16,6 @@ public class Customer extends BasisEntity {
 
 
     public void init() {
-
 
     }
 

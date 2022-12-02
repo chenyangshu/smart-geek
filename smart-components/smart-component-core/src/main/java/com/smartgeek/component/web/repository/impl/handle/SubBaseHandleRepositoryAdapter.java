@@ -24,7 +24,7 @@ import java.io.Serializable;
  * @param <SD>  SubEntity
  * @param <SP>  SubPo
  * @param <SPM> SubPoMapper
- * @author xueyi
+ * @author cys
  */
 public abstract class SubBaseHandleRepositoryAdapter<Q extends P, D extends P, P extends SubBaseEntity<SD>, PM extends SubBaseMapper<Q, D, P, SQ, SD, SP>, CT extends BaseConverter<Q, D, P>, SQ extends SP, SD extends SP, SP extends BaseEntity, SPM extends BaseMapper<SQ, SD, SP>, SCT extends BaseConverter<SQ, SD, SP>> extends BaseRepositoryAdapter<Q, D, P, PM, CT> {
 

@@ -4,7 +4,7 @@ package com.smartgeek.component.exception;
 import com.smartgeek.component.constants.BaseEnum;
 
 /**
- * @author gim 强制业务异常必须提供code码，便于统一维护
+ * @author cys 强制业务异常必须提供code码，便于统一维护
  */
 public class BusinessException extends RuntimeException {
 

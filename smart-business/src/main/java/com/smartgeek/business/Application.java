@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Spring Boot Starter
  *
- * @author Frank Zhang
+ * @author cys
  */
 @SpringBootApplication
 public class Application {

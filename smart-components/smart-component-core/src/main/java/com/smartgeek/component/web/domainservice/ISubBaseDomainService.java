@@ -10,7 +10,7 @@ import com.smartgeek.component.web.model.base.SubBaseEntity;
  * @param <D>  Entity
  * @param <SQ> SubQuery
  * @param <SD> SubEntity
- * @author xueyi
+ * @author cys
  */
 public interface ISubBaseDomainService<Q extends SubBaseEntity<SD>, D extends SubBaseEntity<SD>, SQ extends BaseEntity, SD extends BaseEntity> extends IBaseDomainService<Q, D>, ISubDomainService<Q, D, SQ, SD> {
 }

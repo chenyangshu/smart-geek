@@ -12,7 +12,7 @@ import java.util.List;
  * @param <D>  Entity
  * @param <SQ> SubQuery
  * @param <SD> SubEntity
- * @author xueyi
+ * @author cys
  */
 public interface ISubRepositoryPort<Q extends BaseEntity, D extends BaseEntity, SQ extends BaseEntity, SD extends BaseEntity> {
 

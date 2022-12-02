@@ -3,7 +3,8 @@ package com.smartgeek.component.demo.client.api;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.SingleResponse;
 import com.smartgeek.component.demo.client.dto.CustomerAddCmd;
-import com.smartgeek.component.demo.client.dto.CustomerCO;
+import com.smartgeek.component.demo.client.dto.clientobject.CustomerCO;
+import com.smartgeek.component.demo.client.dto.query.CustomerListByNameQry;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,5 +19,5 @@ public interface CustomerClient {
     SingleResponse<String> addCustomer(@RequestBody @Validated CustomerAddCmd customerAddCmd);
 
     @GetMapping(value = "/api/customer/list")
-    MultiResponse<CustomerCO> listCustomerByName(@RequestParam String name);
+    MultiResponse<CustomerCO> listCustomerByName(@Validated CustomerListByNameQry customerListByNameQry);
 }

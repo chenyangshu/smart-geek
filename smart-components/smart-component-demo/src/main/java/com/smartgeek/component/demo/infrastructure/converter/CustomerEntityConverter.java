@@ -1,9 +1,7 @@
 package com.smartgeek.component.demo.infrastructure.converter;
 
-import com.smartgeek.component.demo.client.dto.CustomerCO;
 import com.smartgeek.component.demo.domain.customer.Customer;
 import com.smartgeek.component.demo.infrastructure.tunnel.db.po.CustomerPO;
-import com.smartgeek.component.mapping.ModelMappingI;
 import com.smartgeek.component.web.converter.BasicConverter;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

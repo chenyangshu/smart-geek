@@ -8,7 +8,7 @@ import com.smartgeek.component.web.model.base.TreeEntity;
  * @param <Q> Query
  * @param <D> Entity
  * @param <P> Po
- * @author xueyi
+ * @author cys
  */
 public interface TreeMapper<Q extends P, D extends P, P extends TreeEntity<D>> extends BaseMapper<Q, D, P> {
 }

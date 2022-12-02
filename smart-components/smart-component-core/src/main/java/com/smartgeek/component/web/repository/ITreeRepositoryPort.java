@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @param <Q> Query
  * @param <D> Entity
- * @author xueyi
+ * @author cys
  */
 public interface ITreeRepositoryPort<Q extends TreeEntity<D>, D extends TreeEntity<D>> extends IBaseRepositoryPort<Q, D> {
 

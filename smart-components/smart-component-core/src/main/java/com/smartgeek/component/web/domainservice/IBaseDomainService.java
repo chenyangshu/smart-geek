@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @param <Q> Query
  * @param <D> Entity
- * @author xueyi
+ * @author cys
  */
 public interface IBaseDomainService<Q extends BaseEntity, D extends BaseEntity> {
 

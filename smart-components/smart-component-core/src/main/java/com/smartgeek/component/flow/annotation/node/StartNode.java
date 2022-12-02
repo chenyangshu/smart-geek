@@ -13,7 +13,9 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Node
+@Node(
+        enableNodeTx = true
+)
 public @interface StartNode {
     @AliasFor(
             annotation = Node.class,

@@ -3,7 +3,7 @@ package com.smartgeek.component.operation;
 import com.google.common.base.Preconditions;
 import com.smartgeek.component.constants.CodeEnum;
 import com.smartgeek.component.exception.BusinessException;
-import com.smartgeek.component.validator.UpdateGroup;
+import com.smartgeek.component.validate.UpdateGroup;
 import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 

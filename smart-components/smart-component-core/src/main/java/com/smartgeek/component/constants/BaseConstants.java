@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 /**
  * 通用常量
  *
- * @author xueyi
+ * @author cys
  */
 public class BaseConstants {
 

@@ -23,7 +23,7 @@ import java.util.List;
  * @param <SQ>  SubQuery
  * @param <SD>  SubEntity
  * @param <ISS> SubIService
- * @author xueyi
+ * @author cys
  */
 public abstract class SubTreeDomainServiceImpl<Q extends SubTreeEntity<D, SD>, D extends SubTreeEntity<D, SD>, IDG extends ISubTreeRepositoryPort<Q, D, SQ, SD>, SQ extends BaseEntity, SD extends BaseEntity, ISS extends IBaseDomainService<SQ, SD>> extends SubTreeHandleDomainServiceImpl<Q, D, IDG, SQ, SD, ISS> implements ISubTreeDomainService<Q, D, SQ, SD> {
 
