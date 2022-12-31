@@ -24,12 +24,12 @@ import java.util.function.Supplier;
 public class EntityUpdater<T> extends BaseEntityOperation implements Loader<T>,
         UpdateHandler<T>, Executor<T> {
 
-    private final IRepositoryPort<T> port;
+    private final BaseRepository<T> port;
     private T entity;
     private Consumer<T> successHook = t -> log.info("update success");
     private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
 
-    public EntityUpdater(IRepositoryPort<T> port) {
+    public EntityUpdater(BaseRepository<T> port) {
         this.port = port;
     }
 

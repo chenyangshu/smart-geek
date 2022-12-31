@@ -1,7 +1,7 @@
 package com.smartgeek.component.web.repository.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.smartgeek.component.operation.IRepositoryPort;
+import com.smartgeek.component.operation.BaseRepository;
 import com.smartgeek.component.web.converter.BasicConverter;
 import com.smartgeek.component.web.mapper.BasicMapper;
 import com.smartgeek.component.web.model.base.BasisEntity;
@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * @author cys
  */
-public class RepositoryAdapter<T extends BasisEntity, P extends BasisEntity, CT extends BasicConverter<T, P>, PM extends BasicMapper<P>> implements IRepositoryPort<T> {
+public class RepositoryAdapter<T extends BasisEntity, P extends BasisEntity, CT extends BasicConverter<T, P>, PM extends BasicMapper<P>> implements BaseRepository<T> {
 
     @Autowired
     private CT converter;

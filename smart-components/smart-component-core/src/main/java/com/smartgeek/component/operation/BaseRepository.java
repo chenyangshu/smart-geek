@@ -1,7 +1,5 @@
 package com.smartgeek.component.operation;
 
-import com.smartgeek.component.web.model.base.BasisEntity;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.Optional;
  * @date 2022/11/27 14:52
  * @description:
  */
-public interface IRepositoryPort<T> {
+public interface BaseRepository<T> {
 
     boolean existsById(Serializable id);
 

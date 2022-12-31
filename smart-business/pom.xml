@@ -7,6 +7,7 @@
     <artifactId>smart-business</artifactId>
     <modules>
         <module>unjuanable</module>
+        <module>bizwork</module>
     </modules>
     <build>
         <plugins>
@@ -77,14 +78,19 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.chenyangshu</groupId>
-            <artifactId>smart-component-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.chenyangshu</groupId>-->
+<!--            <artifactId>smart-component-starter</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 

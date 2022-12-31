@@ -22,12 +22,12 @@ import java.util.function.Supplier;
 public class EntityCreator<T > extends BaseEntityOperation implements Create<T>, UpdateHandler<T>,
         Executor<T> {
 
-    private final IRepositoryPort<T> port;
+    private final BaseRepository<T> port;
     private T t;
     private Consumer<T> successHook = t -> log.info("save success");
     private Consumer<? super Throwable> errorHook = e -> e.printStackTrace();
 
-    public EntityCreator(IRepositoryPort<T> port) {
+    public EntityCreator(BaseRepository<T> port) {
         this.port = port;
     }
 

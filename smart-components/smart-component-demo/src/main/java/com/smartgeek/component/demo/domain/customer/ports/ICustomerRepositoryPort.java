@@ -2,7 +2,7 @@ package com.smartgeek.component.demo.domain.customer.ports;
 
 import com.smartgeek.component.annotation.domain.Port;
 import com.smartgeek.component.demo.domain.customer.Customer;
-import com.smartgeek.component.operation.IRepositoryPort;
+import com.smartgeek.component.operation.BaseRepository;
 
 /**
  * @author cys
@@ -10,5 +10,5 @@ import com.smartgeek.component.operation.IRepositoryPort;
  * @description:
  */
 @Port
-public interface ICustomerRepositoryPort extends IRepositoryPort<Customer> {
+public interface ICustomerRepositoryPort extends BaseRepository<Customer> {
 }
