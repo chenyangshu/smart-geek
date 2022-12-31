@@ -30,6 +30,6 @@ public enum ValidStatus implements BaseEnum<ValidStatus> {
     }
 
     public static Optional<ValidStatus> of(Integer code) {
-        return Optional.ofNullable(parseByCode(ValidStatus.class, code));
+        return Optional.ofNullable(BaseEnum.parseByCode(ValidStatus.class, code));
     }
 }

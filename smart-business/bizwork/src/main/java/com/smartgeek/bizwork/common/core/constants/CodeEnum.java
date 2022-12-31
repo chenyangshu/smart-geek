@@ -53,6 +53,6 @@ public enum CodeEnum implements BaseEnum<CodeEnum> {
     }
 
     public static Optional<CodeEnum> of(Integer code) {
-        return Optional.ofNullable(parseByCode(CodeEnum.class, code));
+        return Optional.ofNullable(BaseEnum.parseByCode(CodeEnum.class, code));
     }
 }
