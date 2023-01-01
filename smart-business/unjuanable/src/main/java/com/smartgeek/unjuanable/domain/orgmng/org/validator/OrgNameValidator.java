@@ -10,4 +10,12 @@ public class OrgNameValidator {
     public void verify(Long tenantId, String name, Long superiorId) {
 
     }
+
+    public void orgNameShouldNotEmpty(String newName) {
+
+    }
+
+    public void nameShouldNotDuplicatedInSameSuperior(Long tenantId, Long superior, String newName) {
+
+    }
 }

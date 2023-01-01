@@ -10,4 +10,8 @@ public class OrgLeaderValidator {
     public void verify(Long tenantId, Long leaderId) {
 
     }
+
+    public void leaderShouldBeEffective(Long tenantId, Long newLeader) {
+
+    }
 }

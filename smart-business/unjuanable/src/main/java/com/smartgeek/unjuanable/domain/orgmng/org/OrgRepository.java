@@ -14,4 +14,8 @@ public interface OrgRepository {
             , String name);
 
     Org save(Org org);
+
+    Optional<Org>  findById(Long tenantId, Long id);
+
+    void update(Org org);
 }

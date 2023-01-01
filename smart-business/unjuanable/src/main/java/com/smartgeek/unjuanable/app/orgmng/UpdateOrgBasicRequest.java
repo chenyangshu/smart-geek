@@ -1,19 +1,15 @@
-package com.smartgeek.unjuanable.domain.orgmng.org;
+package com.smartgeek.unjuanable.app.orgmng;
 
+import com.smartgeek.unjuanable.domain.orgmng.org.OrgStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-/**
- * 组织
- *
- * @author chenyangshu
- * @date 2022/12/29
- */
 @Getter
 @Setter
-public class Org {
+public class UpdateOrgBasicRequest {
+
     private Long id;
     private Long tenantId;
     private Long superiorId;
@@ -30,24 +26,5 @@ public class Org {
     private LocalDateTime lastUpdatedAt;
 
     private Long lastUpdatedBy;
-
-
-    public Org() {
-
-        status = OrgStatus.EFFECTIVE;
-
-    }
-
-
-    public void cancel(){
-        this.status=OrgStatus.CANCELLED;
-    }
-
-
-    public boolean isEffective(){
-        return status.equals(OrgStatus.EFFECTIVE);
-    }
-
-
 
 }
