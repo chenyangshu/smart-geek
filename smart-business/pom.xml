@@ -8,6 +8,7 @@
     <modules>
         <module>unjuanable</module>
         <module>bizwork</module>
+        <module>multisaas</module>
     </modules>
     <build>
         <plugins>
