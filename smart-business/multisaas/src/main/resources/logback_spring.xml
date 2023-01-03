@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <!--日志文件名称：这里spring.application.name表示工程名称-->
+    <springProperty scope="context" name="springAppName" source="spring.application.name" />
+    <springProperty scope="context" name="serverPort" source="server.port" />
+    <springProperty scope="context" name="LOG_LEVEL" source="common.web.logging.level" />
+
+    <property name="LOG_FILE" value="app/logs" />
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%X{TRACE_ID}]) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Minimum logging level to be presented in the console logs -->
+            <level>DEBUG</level>
+        </filter>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_FILE}/%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- 日志文件保留天数 -->
+            <MaxHistory>365</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} [TraceId:%X{TRACE_ID}] [%thread]  [%logger{50}]  %n%-5level: %msg%n</pattern>
+        </encoder>
+        <!-- 日志文件最大的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>500MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 打印日志级别 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 生成日志文件 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_FILE}/%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- 日志文件保留天数 -->
+            <MaxHistory>365</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} [TraceId:%X{TRACE_ID}] [%thread]  [%logger{50}] %n%-5level: %msg%n</pattern>
+        </encoder>
+        <!-- 日志文件最大的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>500MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 打印日志级别 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="async-appender-info-file" class="ch.qos.logback.classic.AsyncAppender">
+        <!--内部实现是一个有界ArrayBlockingQueue,queueSize是队列大小。该值会影响性能.默认值为256-->
+        <queueSize>512</queueSize>
+        <!--当队列的剩余容量小于这个阈值并且当前日志level TRACE, DEBUG or INFO，则丢弃这些日志。默认为queueSize大小的20%。-->
+        <discardingThreshold>0</discardingThreshold>
+        <!--neverBlock=true则写日志队列时候会调用阻塞队列的offer方法而不是put，如果队列满则直接返回，而不是阻塞，即日志被丢弃。-->
+        <neverBlock>true</neverBlock>
+        <!--实际负责写日志的appender,最多只能添加一个-->
+        <appender-ref ref="INFO" />
+    </appender>
+
+    <appender name="async-appender-error-file" class="ch.qos.logback.classic.AsyncAppender">
+        <!--内部实现是一个有界ArrayBlockingQueue,queueSize是队列大小。该值会影响性能.默认值为256-->
+        <queueSize>512</queueSize>
+        <!--当队列的剩余容量小于这个阈值并且当前日志level TRACE, DEBUG or INFO，则丢弃这些日志。默认为queueSize大小的20%。-->
+        <discardingThreshold>0</discardingThreshold>
+        <!--neverBlock=true则写日志队列时候会调用阻塞队列的offer方法而不是put，如果队列满则直接返回，而不是阻塞，即日志被丢弃。-->
+        <neverBlock>true</neverBlock>
+        <!--实际负责写日志的appender,最多只能添加一个-->
+        <appender-ref ref="ERROR" />
+    </appender>
+
+    <root level="${LOG_LEVEL}">
+        <springProfile name="dev">
+            <appender-ref ref="STDOUT" />
+        </springProfile>
+        <springProfile name="sit">
+            <appender-ref ref="STDOUT" />
+        </springProfile>
+        <springProfile name="local">
+            <appender-ref ref="STDOUT" />
+        </springProfile>
+        <appender-ref ref="async-appender-info-file" />
+        <appender-ref ref="async-appender-error-file" />
+        <!--写到 logstash -->
+    </root>
+
+</configuration>
