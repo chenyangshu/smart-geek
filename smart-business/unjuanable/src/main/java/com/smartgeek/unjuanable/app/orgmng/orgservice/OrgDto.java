@@ -1,14 +1,13 @@
-package com.smartgeek.unjuanable.app.orgmng;
+package com.smartgeek.unjuanable.app.orgmng.orgservice;
 
 import com.smartgeek.unjuanable.domain.orgmng.org.OrgStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class CreateOrgRequest {
+public class OrgDto {
 
     private Long id;
     private Long tenantId;

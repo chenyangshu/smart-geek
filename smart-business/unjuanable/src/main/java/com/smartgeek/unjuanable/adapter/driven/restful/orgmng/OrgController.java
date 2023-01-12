@@ -1,7 +1,7 @@
 package com.smartgeek.unjuanable.adapter.driven.restful.orgmng;
 
-import com.smartgeek.unjuanable.app.orgmng.OrgDto;
-import com.smartgeek.unjuanable.app.orgmng.OrgService;
+import com.smartgeek.unjuanable.app.orgmng.orgservice.OrgDto;
+import com.smartgeek.unjuanable.app.orgmng.orgservice.OrgService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

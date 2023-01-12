@@ -17,6 +17,16 @@ public class OrgRepositoryJDBC implements OrgRepository {
     }
 
     @Override
+    public Optional<Org> findById(Long tenantId, Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void update(Org org) {
+
+    }
+
+    @Override
     public Optional<Org> findByIdAndStatus(long tenantId, Long id, OrgStatus status) {
         return Optional.empty();
     }

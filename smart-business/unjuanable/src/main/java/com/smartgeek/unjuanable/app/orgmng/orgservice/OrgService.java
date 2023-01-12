@@ -1,4 +1,4 @@
-package com.smartgeek.unjuanable.app.orgmng;
+package com.smartgeek.unjuanable.app.orgmng.orgservice;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.smartgeek.unjuanable.domain.orgmng.org.*;

@@ -30,4 +30,12 @@ public class WorkExperience extends AuditableEntity {
         this.company = company;
     }
 
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 }
